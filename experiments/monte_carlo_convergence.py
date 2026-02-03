@@ -16,7 +16,7 @@ from estimation.t_learner import fit_t_learner
 from welfare.welfare import true_welfare, plugin_welfare
 
 
-def monte_carlo(n, R=200, method="t_learner", t_estimator="linear", out_dir=None, show_progress=True, progress_percent=10, seed=0, delta=0.9, true_welfare_val=None, dgp="linear", spline_knots=None, spline_degree=3, cf_n_estimators=200, cf_max_depth=10, cf_min_samples_leaf=20, rf_n_estimators=100, rf_max_depth=10):
+def monte_carlo(n, R=200, method="t_learner", t_estimator="linear", out_dir=None, show_progress=True, progress_percent=10, seed=0, delta=0.9, true_welfare_val=None, dgp="linear", spline_knots=None, spline_degree=3, cf_n_estimators=200, cf_max_depth=10, cf_min_samples_leaf=20):
     """Run Monte Carlo simulation with tuning parameters for estimators.
     
     Parameters:
@@ -69,7 +69,7 @@ def monte_carlo(n, R=200, method="t_learner", t_estimator="linear", out_dir=None
                 raise RuntimeError("Failed to import causal forest (is econml installed?).") from e
 
             cf_params = {"n_estimators": cf_n_estimators, "min_samples_leaf": cf_min_samples_leaf}
-            rf_params = {"n_estimators": rf_n_estimators, "max_depth": rf_max_depth}
+            rf_params = {"n_estimators": cf_n_estimators, "max_depth": cf_max_depth}
             cf_S = fit_causal_forest(df, "S", random_state=run_seed, cf_params=cf_params, rf_regressor_params=rf_params, rf_classifier_params=rf_params)
             cf_Y = fit_causal_forest(df, "Y", random_state=run_seed + 1000 if run_seed is not None else None, cf_params=cf_params, rf_regressor_params=rf_params, rf_classifier_params=rf_params)
         elif method == "t_learner":
@@ -119,7 +119,7 @@ def monte_carlo(n, R=200, method="t_learner", t_estimator="linear", out_dir=None
 
     return results
 
-def format_tuning_params_report(method, t_estimator, spline_knots, spline_degree, cf_n_estimators, cf_max_depth, cf_min_samples_leaf, rf_n_estimators, rf_max_depth):
+def format_tuning_params_report(method, t_estimator, spline_knots, spline_degree, cf_n_estimators, cf_max_depth, cf_min_samples_leaf):
     """Format a report of tuning parameters for display."""
     report = f"\n{'='*75}\nTUNING PARAMETERS\n{'='*75}\n"
     report += f"Method: {method}\n"
@@ -130,13 +130,11 @@ def format_tuning_params_report(method, t_estimator, spline_knots, spline_degree
             report += f"    - Spline knots: {spline_knots}\n"
             report += f"    - Spline degree: {spline_degree}\n"
     elif method == "causal_forest":
-        report += f"  Causal Forest parameters:\n"
+        report += f"  Causal Forest (random forest based):\n"
         report += f"    - n_estimators: {cf_n_estimators}\n"
         report += f"    - max_depth: {cf_max_depth}\n"
         report += f"    - min_samples_leaf: {cf_min_samples_leaf}\n"
-        report += f"  Random Forest (for treatment/outcome models):\n"
-        report += f"    - n_estimators: {rf_n_estimators}\n"
-        report += f"    - max_depth: {rf_max_depth}\n"
+        report += f"  (These parameters apply to all forest components)\n"
     
     report += f"{'='*75}\n"
     return report
@@ -158,8 +156,6 @@ if __name__ == "__main__":
     parser.add_argument("--cf-n-estimators", type=int, default=200, help="Number of trees in causal forest (default: 200)")
     parser.add_argument("--cf-max-depth", type=int, default=10, help="Max depth in causal forest (default: 10)")
     parser.add_argument("--cf-min-samples-leaf", type=int, default=20, help="Min samples per leaf in causal forest (default: 20)")
-    parser.add_argument("--rf-n-estimators", type=int, default=100, help="Number of trees in random forests (default: 100)")
-    parser.add_argument("--rf-max-depth", type=int, default=10, help="Max depth for random forests (default: 10)")
 
     args = parser.parse_args()
 
@@ -171,8 +167,7 @@ if __name__ == "__main__":
     print(format_tuning_params_report(
         args.method, args.t_estimator,
         args.spline_knots, args.spline_degree,
-        args.cf_n_estimators, args.cf_max_depth, args.cf_min_samples_leaf,
-        args.rf_n_estimators, args.rf_max_depth
+        args.cf_n_estimators, args.cf_max_depth, args.cf_min_samples_leaf
     ))
 
     # Collect results for all configurations
@@ -186,7 +181,7 @@ if __name__ == "__main__":
     true_param = true_welfare(df_true.tau_S.values, df_true.tau_Y.values, args.delta)
 
     for n in args.ns:
-        results = monte_carlo(n, R=args.R, method=args.method, t_estimator=args.t_estimator, out_dir=args.out_dir, show_progress=args.progress, progress_percent=args.progress_percent, seed=args.seed, delta=args.delta, true_welfare_val=true_param, dgp=dgp_name, spline_knots=args.spline_knots, spline_degree=args.spline_degree, cf_n_estimators=args.cf_n_estimators, cf_max_depth=args.cf_max_depth, cf_min_samples_leaf=args.cf_min_samples_leaf, rf_n_estimators=args.rf_n_estimators, rf_max_depth=args.rf_max_depth)
+        results = monte_carlo(n, R=args.R, method=args.method, t_estimator=args.t_estimator, out_dir=args.out_dir, show_progress=args.progress, progress_percent=args.progress_percent, seed=args.seed, delta=args.delta, true_welfare_val=true_param, dgp=dgp_name, spline_knots=args.spline_knots, spline_degree=args.spline_degree, cf_n_estimators=args.cf_n_estimators, cf_max_depth=args.cf_max_depth, cf_min_samples_leaf=args.cf_min_samples_leaf)
         gaps = results["gaps"]
         all_results.append({
             "method": args.method,

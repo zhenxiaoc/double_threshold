@@ -25,14 +25,13 @@ DELTA=0.9                # Discount factor for welfare
 SPLINE_KNOTS=5           # Number of spline knots (default: empty for auto)
 SPLINE_DEGREE=3          # Degree of spline basis (default: 3)
 
-# Causal forest parameters (only relevant if METHOD=causal_forest)
+# Causal forest / Random forest parameters (only relevant if METHOD=causal_forest)
+# Note: Causal forest uses random forests under the hood for both the main model
+# and auxiliary models (for treatment/outcome estimation), so these parameters
+# apply to all forest components.
 CF_N_ESTIMATORS=200      # Number of trees in causal forest
 CF_MAX_DEPTH=10          # Max tree depth in causal forest
 CF_MIN_SAMPLES_LEAF=20   # Min samples per leaf in causal forest
-
-# Random forest parameters (for treatment/outcome models in causal forest)
-RF_N_ESTIMATORS=100      # Number of trees in random forests
-RF_MAX_DEPTH=10          # Max depth for random forests
 
 .PHONY: run-mc plot example help
 
@@ -46,7 +45,6 @@ help:
 	@echo "  METHOD, T_EST, DGP, R, NS, OUT, DELTA"
 	@echo "  SPLINE_KNOTS, SPLINE_DEGREE"
 	@echo "  CF_N_ESTIMATORS, CF_MAX_DEPTH, CF_MIN_SAMPLES_LEAF"
-	@echo "  RF_N_ESTIMATORS, RF_MAX_DEPTH"
 	@echo ""
 	@echo "Examples:"
 	@echo "  make run-mc METHOD=causal_forest CF_N_ESTIMATORS=150"
@@ -66,8 +64,6 @@ run-mc:
 		--cf-n-estimators $(CF_N_ESTIMATORS) \
 		--cf-max-depth $(CF_MAX_DEPTH) \
 		--cf-min-samples-leaf $(CF_MIN_SAMPLES_LEAF) \
-		--rf-n-estimators $(RF_N_ESTIMATORS) \
-		--rf-max-depth $(RF_MAX_DEPTH) \
 		--progress --progress-percent 10
 
 plot:
