@@ -51,7 +51,7 @@ help:
 	@echo "  make run-mc T_EST=linear DGP=1 R=100"
 
 run-mc:
-	$(PY) $(MC) \
+	@$(PY) $(MC) \
 		--method $(METHOD) \
 		--t-estimator $(T_EST) \
 		--dgp $(DGP) \

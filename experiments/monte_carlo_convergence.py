@@ -163,13 +163,6 @@ if __name__ == "__main__":
     dgp_map = {1: "linear", 2: "nonlinear", 3: "trigonometric"}
     dgp_name = dgp_map[args.dgp]
 
-    # Print tuning parameters report before running simulations
-    print(format_tuning_params_report(
-        args.method, args.t_estimator,
-        args.spline_knots, args.spline_degree,
-        args.cf_n_estimators, args.cf_max_depth, args.cf_min_samples_leaf
-    ))
-
     # Collect results for all configurations
     import matplotlib.pyplot as plt
     all_results = []
@@ -196,8 +189,15 @@ if __name__ == "__main__":
         vals_list.append(vals)
         ns_list.append(n)
 
+    # Print tuning parameters report right before results table
+    print(format_tuning_params_report(
+        args.method, args.t_estimator,
+        args.spline_knots, args.spline_degree,
+        args.cf_n_estimators, args.cf_max_depth, args.cf_min_samples_leaf
+    ))
+
     # Print a summary table (without result file)
-    print("\nSummary of Monte Carlo Results:")
+    print("Summary of Monte Carlo Results:")
     print(f"{'Method':<12} {'T_Est':<10} {'n':>6} {'R':>5} {'W_Bias':>10} {'W_SD':>10} {'True_W':>12}")
     print("-"*75)
     for res in all_results:
