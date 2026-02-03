@@ -11,7 +11,7 @@ PLOT=$(PYTHON) experiments/plot_estimates.py
 
 METHOD=t_learner         # t_learner or causal_forest
 T_EST=linear             # linear or spline (only used for t_learner)
-DGP=2                    # 1=linear, 2=nonlinear, 3=trigonometric
+DGP=3                    # 1=linear, 2=nonlinear, 3=trigonometric
 R=500                    # Monte Carlo repetitions
 NS=1500 3000             # Sample sizes to run
 OUT=experiments/results  # Output directory
@@ -22,7 +22,7 @@ DELTA=0.9                # Discount factor for welfare
 # ============================================================================
 
 # T-learner with spline (only relevant if T_EST=spline)
-SPLINE_KNOTS=             # Number of spline knots (leave empty, or override with --spline-knots 5)
+SPLINE_KNOTS=5             # Number of spline knots (leave empty, or override with --spline-knots 5)
 SPLINE_DEGREE=3          # Degree of spline basis (default: 3)
 
 # Causal forest / Random forest parameters (only relevant if METHOD=causal_forest)
