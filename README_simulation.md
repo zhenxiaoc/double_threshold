@@ -1,13 +1,15 @@
 ## Data-Generating Process (DGP)
 
-The synthetic data is generated as follows:
+The simulation supports three DGPs: linear, nonlinear (polynomial), and trigonometric. Users can choose which DGP to use via the `--dgp` argument (1, 2, or 3).
+
+### Linear DGP (DGP 1, Default)
 
 - **Covariates:**
    - $X_1 \sim N(0, 1)$
    - $X_2 \sim N(0, 1)$
 - **Treatment:**
    - $D \sim \text{Bernoulli}(0.5)$ (random assignment)
-- **True CATEs:**
+- **True CATEs (linear in X):**
    - Surrogate: $\tau_S = 1.0 + 0.5 X_1 - 0.3 X_2$
    - Outcome: $\tau_Y = 0.5 + 0.2 X_1 + 0.4 X_2$
 - **Potential Outcomes:**
@@ -18,6 +20,28 @@ The synthetic data is generated as follows:
 - **Observed Data:**
    - $S = D \cdot S_1 + (1-D) \cdot S_0$
    - $Y = D \cdot Y_1 + (1-D) \cdot Y_0$
+
+### Nonlinear DGP (DGP 2, Polynomial with Cubic Terms)
+
+- **Covariates and Treatment:** Same as linear DGP
+- **True CATEs (highly nonlinear in X with cubic and interaction terms):**
+   - Surrogate: $\tau_S = 1.0 + 0.4 X_1 - 0.5 X_2 + 0.6 X_1^2 - 0.5 X_2^2 + 0.4 X_1^3 - 0.35 X_2^3 + 0.5 X_1 X_2 + 0.3 X_1^2 X_2 - 0.3 X_1 X_2^2$
+   - Outcome: $\tau_Y = 0.6 + 0.3 X_1 + 0.4 X_2 - 0.5 X_1^2 + 0.4 X_2^2 - 0.35 X_1^3 + 0.3 X_2^3 - 0.4 X_1 X_2 - 0.25 X_1^2 X_2 + 0.25 X_1 X_2^2$
+- **Potential Outcomes:**
+   - $\mu_S = 2.0 + 0.6 X_1 + 0.5 X_2 + 0.4 X_1^2 - 0.3 X_2^2 + 0.2 X_1^3 - 0.15 X_2^3$
+   - $\mu_Y = 1.5 + 0.4 X_1 - 0.35 X_2 - 0.3 X_1^2 + 0.25 X_2^2 - 0.15 X_1^3 + 0.1 X_2^3$
+   - Outcomes generated analogously to linear DGP
+
+### Trigonometric DGP (DGP 3, Sin/Cos with Higher-Order Interactions)
+
+- **Covariates and Treatment:** Same as linear DGP
+- **True CATEs (highly nonlinear in X with trigonometric and interaction terms):**
+   - Surrogate: $\tau_S = 1.0 + 1.2 \sin(X_1) + 1.0 \cos(X_2) + 0.8 \sin(X_1) \cos(X_2) + 0.5 X_1^2 \sin(X_2) + 0.4 X_2^2 \cos(X_1)$
+   - Outcome: $\tau_Y = 0.5 + 0.9 \cos(X_1) + 0.7 \sin(X_2) - 0.6 \sin(X_1) \cos(X_2) - 0.4 X_1^2 \sin(X_1) + 0.35 X_2^2 \cos(X_2)$
+- **Potential Outcomes:**
+   - $\mu_S = 2.2 + 0.9 \sin(X_1) + 0.7 \cos(X_2) + 0.4 X_1^2 \cos(X_1)$
+   - $\mu_Y = 1.4 + 0.6 \cos(X_1) - 0.5 \sin(X_2) - 0.3 X_2^2 \sin(X_2)$
+   - Outcomes generated analogously to linear DGP
 
 This structure ensures that the true CATEs and welfare parameter are known for each sample, allowing precise evaluation of plugin estimators.
 # Monte Carlo Simulation Procedure
@@ -76,7 +100,7 @@ The main goal of this simulation framework is to examine the performance of plug
 **Welfare Parameter (Plugin Estimator):**
    - The main estimand is the welfare parameter, not the CATE itself.
    - Different CATE estimators are used as plugin inputs, but the focus is on how well the plugin formula recovers the true welfare value.
-   
+
 **Welfare Gap:**
    - The difference between the plugin-estimated and true welfare, summarizing the practical impact of estimation error.
 
