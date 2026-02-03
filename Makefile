@@ -10,7 +10,7 @@ PLOT=$(PYTHON) experiments/plot_estimates.py
 # ============================================================================
 
 METHOD=t_learner         # t_learner or causal_forest
-T_EST=spline             # linear or spline (only used for t_learner)
+T_EST=linear             # linear or spline (only used for t_learner)
 DGP=2                    # 1=linear, 2=nonlinear, 3=trigonometric
 R=500                    # Monte Carlo repetitions
 NS=1500 3000             # Sample sizes to run
@@ -22,7 +22,7 @@ DELTA=0.9                # Discount factor for welfare
 # ============================================================================
 
 # T-learner with spline (only relevant if T_EST=spline)
-SPLINE_KNOTS=5           # Number of spline knots (default: empty for auto)
+SPLINE_KNOTS=             # Number of spline knots (leave empty, or override with --spline-knots 5)
 SPLINE_DEGREE=3          # Degree of spline basis (default: 3)
 
 # Causal forest / Random forest parameters (only relevant if METHOD=causal_forest)
@@ -59,8 +59,7 @@ run-mc:
 		--ns $(NS) \
 		--out-dir $(OUT) \
 		--delta $(DELTA) \
-		--spline-knots $(if $(SPLINE_KNOTS),$(SPLINE_KNOTS),) \
-		--spline-degree $(SPLINE_DEGREE) \
+		$(if $(filter spline,$(T_EST)),--spline-knots $(if $(SPLINE_KNOTS),$(SPLINE_KNOTS),) --spline-degree $(SPLINE_DEGREE),) \
 		--cf-n-estimators $(CF_N_ESTIMATORS) \
 		--cf-max-depth $(CF_MAX_DEPTH) \
 		--cf-min-samples-leaf $(CF_MIN_SAMPLES_LEAF) \
