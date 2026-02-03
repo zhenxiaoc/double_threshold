@@ -16,8 +16,15 @@ from estimation.t_learner import fit_t_learner
 from welfare.welfare import true_welfare, plugin_welfare
 
 
-def monte_carlo(n, R=200, method="t_learner", t_estimator="linear", out_dir=None, show_progress=True, progress_percent=10, seed=0, delta=0.9, true_welfare_val=None):
-    """Add `seed` (int) to set a reproducible base RNG. Per-run seeds are derived as `seed + r`."""
+def monte_carlo(n, R=200, method="t_learner", t_estimator="linear", out_dir=None, show_progress=True, progress_percent=10, seed=0, delta=0.9, true_welfare_val=None, dgp="linear", spline_knots=None, spline_degree=3, cf_n_estimators=200, cf_max_depth=10, cf_min_samples_leaf=20, rf_n_estimators=100, rf_max_depth=10):
+    """Run Monte Carlo simulation with tuning parameters for estimators.
+    
+    Parameters:
+    - dgp: "linear", "nonlinear", or "trigonometric" data-generating process
+    - spline_knots, spline_degree: T-learner spline parameters
+    - cf_n_estimators, cf_max_depth, cf_min_samples_leaf: Causal forest params
+    - rf_n_estimators, rf_max_depth: Random forest params
+    """
     """Run Monte Carlo and collect CATE estimates and welfare gaps.
 
     Parameters
@@ -49,7 +56,7 @@ def monte_carlo(n, R=200, method="t_learner", t_estimator="linear", out_dir=None
 
     for r in range(R):
         run_seed = None if seed is None else int(seed) + r
-        df, delta = generate_data(n=n, seed=run_seed)
+        df, delta = generate_data(n=n, seed=run_seed, dgp=dgp)
 
         tau_S_true[r, :] = df.tau_S.values
         tau_Y_true[r, :] = df.tau_Y.values
@@ -61,11 +68,13 @@ def monte_carlo(n, R=200, method="t_learner", t_estimator="linear", out_dir=None
             except Exception as e:
                 raise RuntimeError("Failed to import causal forest (is econml installed?).") from e
 
-            cf_S = fit_causal_forest(df, "S", random_state=run_seed)
-            cf_Y = fit_causal_forest(df, "Y", random_state=run_seed + 1000 if run_seed is not None else None)
+            cf_params = {"n_estimators": cf_n_estimators, "min_samples_leaf": cf_min_samples_leaf}
+            rf_params = {"n_estimators": rf_n_estimators, "max_depth": rf_max_depth}
+            cf_S = fit_causal_forest(df, "S", random_state=run_seed, cf_params=cf_params, rf_regressor_params=rf_params, rf_classifier_params=rf_params)
+            cf_Y = fit_causal_forest(df, "Y", random_state=run_seed + 1000 if run_seed is not None else None, cf_params=cf_params, rf_regressor_params=rf_params, rf_classifier_params=rf_params)
         elif method == "t_learner":
-            cf_S = fit_t_learner(df, "S", estimator=t_estimator, random_state=run_seed)
-            cf_Y = fit_t_learner(df, "Y", estimator=t_estimator, random_state=run_seed + 1000 if run_seed is not None else None)
+            cf_S = fit_t_learner(df, "S", estimator=t_estimator, spline_knots=spline_knots, spline_degree=spline_degree, random_state=run_seed)
+            cf_Y = fit_t_learner(df, "Y", estimator=t_estimator, spline_knots=spline_knots, spline_degree=spline_degree, random_state=run_seed + 1000 if run_seed is not None else None)
         else:
             raise ValueError("Unknown method: choose 'causal_forest' or 't_learner'.")
 
@@ -110,20 +119,61 @@ def monte_carlo(n, R=200, method="t_learner", t_estimator="linear", out_dir=None
 
     return results
 
+def format_tuning_params_report(method, t_estimator, spline_knots, spline_degree, cf_n_estimators, cf_max_depth, cf_min_samples_leaf, rf_n_estimators, rf_max_depth):
+    """Format a report of tuning parameters for display."""
+    report = f"\n{'='*75}\nTUNING PARAMETERS\n{'='*75}\n"
+    report += f"Method: {method}\n"
+    
+    if method == "t_learner":
+        report += f"  T-Estimator base learner: {t_estimator}\n"
+        if t_estimator == "spline":
+            report += f"    - Spline knots: {spline_knots}\n"
+            report += f"    - Spline degree: {spline_degree}\n"
+    elif method == "causal_forest":
+        report += f"  Causal Forest parameters:\n"
+        report += f"    - n_estimators: {cf_n_estimators}\n"
+        report += f"    - max_depth: {cf_max_depth}\n"
+        report += f"    - min_samples_leaf: {cf_min_samples_leaf}\n"
+        report += f"  Random Forest (for treatment/outcome models):\n"
+        report += f"    - n_estimators: {rf_n_estimators}\n"
+        report += f"    - max_depth: {rf_max_depth}\n"
+    
+    report += f"{'='*75}\n"
+    return report
+
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description="Monte Carlo convergence experiment")
     parser.add_argument("--method", choices=["causal_forest", "t_learner"], default="t_learner", help="CATE estimation method to use (default: t_learner)")
     parser.add_argument("--t-estimator", choices=["linear", "spline"], default="linear", help="Base learner for T-learner (if selected)")
+    parser.add_argument("--dgp", choices=[1, 2, 3], type=int, default=1, help="Data-generating process: 1=linear (default), 2=nonlinear, 3=trigonometric")
     parser.add_argument("--R", type=int, default=200, help="Number of Monte Carlo repetitions")
     parser.add_argument("--ns", nargs="*", type=int, default=[1000, 2000, 5000, 10000], help="List of sample sizes to run")
     parser.add_argument("--out-dir", type=str, default="experiments/results", help="Directory to save full results (npz)")
     parser.add_argument("--delta", type=float, default=0.9, help="Discount value delta for welfare calculation")
-    parser.add_argument("--seed", type=int, default=0, help="Base seed for simulation runs (per-run seed = seed + r). Use blank or omit for non-fixed seeds by setting to None manually)")
+    parser.add_argument("--seed", type=int, default=0, help="Base seed for simulation runs (per-run seed = seed + r)")
     parser.add_argument("--progress", action="store_true", help="Show progress updates during runs")
-    parser.add_argument("--progress-percent", type=int, default=10, help="Progress update frequency as a percent (1-100)")
+    parser.add_argument("--progress-percent", type=int, default=10, help="Progress update frequency as percent (1-100)")
+    parser.add_argument("--spline-knots", type=int, default=None, help="Spline knots for T-learner (if using spline)")
+    parser.add_argument("--spline-degree", type=int, default=3, help="Spline degree for T-learner (default: 3)")
+    parser.add_argument("--cf-n-estimators", type=int, default=200, help="Number of trees in causal forest (default: 200)")
+    parser.add_argument("--cf-max-depth", type=int, default=10, help="Max depth in causal forest (default: 10)")
+    parser.add_argument("--cf-min-samples-leaf", type=int, default=20, help="Min samples per leaf in causal forest (default: 20)")
+    parser.add_argument("--rf-n-estimators", type=int, default=100, help="Number of trees in random forests (default: 100)")
+    parser.add_argument("--rf-max-depth", type=int, default=10, help="Max depth for random forests (default: 10)")
 
     args = parser.parse_args()
 
+    # Map DGP number to name
+    dgp_map = {1: "linear", 2: "nonlinear", 3: "trigonometric"}
+    dgp_name = dgp_map[args.dgp]
+
+    # Print tuning parameters report before running simulations
+    print(format_tuning_params_report(
+        args.method, args.t_estimator,
+        args.spline_knots, args.spline_degree,
+        args.cf_n_estimators, args.cf_max_depth, args.cf_min_samples_leaf,
+        args.rf_n_estimators, args.rf_max_depth
+    ))
 
     # Collect results for all configurations
     import matplotlib.pyplot as plt
@@ -132,11 +182,11 @@ if __name__ == "__main__":
     ns_list = []
     # Compute true welfare parameter once using a large sample
     from welfare.welfare import true_welfare
-    df_true, _ = generate_data(n=100000, seed=12345)
+    df_true, _ = generate_data(n=100000, seed=12345, dgp=dgp_name)
     true_param = true_welfare(df_true.tau_S.values, df_true.tau_Y.values, args.delta)
 
     for n in args.ns:
-        results = monte_carlo(n, R=args.R, method=args.method, t_estimator=args.t_estimator, out_dir=args.out_dir, show_progress=args.progress, progress_percent=args.progress_percent, seed=args.seed, delta=args.delta, true_welfare_val=true_param)
+        results = monte_carlo(n, R=args.R, method=args.method, t_estimator=args.t_estimator, out_dir=args.out_dir, show_progress=args.progress, progress_percent=args.progress_percent, seed=args.seed, delta=args.delta, true_welfare_val=true_param, dgp=dgp_name, spline_knots=args.spline_knots, spline_degree=args.spline_degree, cf_n_estimators=args.cf_n_estimators, cf_max_depth=args.cf_max_depth, cf_min_samples_leaf=args.cf_min_samples_leaf, rf_n_estimators=args.rf_n_estimators, rf_max_depth=args.rf_max_depth)
         gaps = results["gaps"]
         all_results.append({
             "method": args.method,
