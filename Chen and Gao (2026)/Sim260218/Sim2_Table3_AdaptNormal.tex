@@ -1,0 +1,32 @@
+\begin{table}[!h]
+\centering
+\small
+\caption{Integral over estimated upper contour set: Sieve estimators with bootstrap-Lepski $\tilde{K}$ selection and normal critical values.}
+\label{tab:Sim2_Disk}
+\vspace{0.3em}
+\textbf{Panel A: Plug-In}
+\begin{tabular}{lcccccccc}
+\hline\hline
+$n$ & RMSE & Bias & SD & CI$_L$ & CI$_U$ & U--L & Coverage(\%) & $\bar{\tilde{K}}$\\
+\hline
+500 & 0.0694 & 0.0072 & 0.0690 & 3.0159 & 3.2818 & 0.2659 & 94.10 & 51.1\\
+1000 & 0.0470 & 0.0011 & 0.0470 & 3.0476 & 3.2378 & 0.1902 & 95.20 & 55.3\\
+2000 & 0.0335 & 0.0009 & 0.0335 & 3.0739 & 3.2110 & 0.1370 & 95.00 & 65.7\\
+4000 & 0.0237 & -0.0004 & 0.0237 & 3.0916 & 3.1907 & 0.0991 & 95.40 & 81.9\\
+8000 & 0.0180 & 0.0009 & 0.0180 & 3.1065 & 3.1786 & 0.0721 & 95.50 & 94.4\\
+\hline\hline
+\end{tabular}
+\vspace{0.3em}
+\textbf{Panel B: LOO Debiased}
+\begin{tabular}{lcccccccc}
+\hline\hline
+$n$ & RMSE & Bias & SD & CI$_L$ & CI$_U$ & U--L & Coverage(\%) & $\bar{\tilde{K}}$\\
+\hline
+500 & 1.0379 & -0.0199 & 1.0383 & 2.9560 & 3.2873 & 0.3314 & 94.80 & 50.5\\
+1000 & 0.0471 & 0.0018 & 0.0471 & 3.0451 & 3.2417 & 0.1966 & 96.20 & 54.9\\
+2000 & 0.0335 & 0.0012 & 0.0335 & 3.0731 & 3.2125 & 0.1394 & 95.30 & 64.9\\
+4000 & 0.0238 & -0.0001 & 0.0238 & 3.0913 & 3.1917 & 0.1004 & 95.40 & 82.0\\
+8000 & 0.0181 & 0.0012 & 0.0180 & 3.1065 & 3.1791 & 0.0726 & 95.60 & 94.4\\
+\hline\hline
+\end{tabular}
+\end{table}

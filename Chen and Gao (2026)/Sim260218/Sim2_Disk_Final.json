@@ -1,0 +1,612 @@
+{
+  "500": {
+    "Plugin_FixedK_NormalCV": {
+      "RMSE": 0.0671,
+      "Bias": 0.0101,
+      "SD": 0.0664,
+      "Cover": 0.933,
+      "CI_L": 3.0215,
+      "CI_U": 3.2819,
+      "CI_Len": 0.2604,
+      "K_bar": 64
+    },
+    "Plugin_AdaptK_NormalCV": {
+      "RMSE": 0.0694,
+      "Bias": 0.0072,
+      "SD": 0.069,
+      "Cover": 0.941,
+      "CI_L": 3.0159,
+      "CI_U": 3.2818,
+      "CI_Len": 0.2659,
+      "K_bar": 51.061
+    },
+    "Plugin_FixedK_BootCV": {
+      "RMSE": 0.0671,
+      "Bias": 0.0101,
+      "SD": 0.0664,
+      "Cover": 0.932,
+      "CI_L": 3.0219,
+      "CI_U": 3.2815,
+      "CI_Len": 0.2596,
+      "K_bar": 64
+    },
+    "Plugin_AdaptK_BootCV": {
+      "RMSE": 0.0694,
+      "Bias": 0.0072,
+      "SD": 0.069,
+      "Cover": 0.934,
+      "CI_L": 3.0168,
+      "CI_U": 3.2809,
+      "CI_Len": 0.2641,
+      "K_bar": 51.061
+    },
+    "Plugin_BiasAware": {
+      "RMSE": 0.0652,
+      "Bias": 0.0351,
+      "SD": 0.055,
+      "Cover": 0.962,
+      "CI_L": 3.0341,
+      "CI_U": 3.3193,
+      "CI_Len": 0.2852,
+      "K_bar": 17.255
+    },
+    "LOO_FixedK_NormalCV": {
+      "RMSE": 0.0743,
+      "Bias": 0.0097,
+      "SD": 0.0737,
+      "Cover": 0.957,
+      "CI_L": 3.0044,
+      "CI_U": 3.2981,
+      "CI_Len": 0.2937,
+      "K_bar": 64
+    },
+    "LOO_AdaptK_NormalCV": {
+      "RMSE": 1.0379,
+      "Bias": -0.0199,
+      "SD": 1.0383,
+      "Cover": 0.948,
+      "CI_L": 2.956,
+      "CI_U": 3.2873,
+      "CI_Len": 0.3314,
+      "K_bar": 50.488
+    },
+    "LOO_FixedK_BootCV": {
+      "RMSE": 0.0743,
+      "Bias": 0.0097,
+      "SD": 0.0737,
+      "Cover": 0.954,
+      "CI_L": 3.0054,
+      "CI_U": 3.2971,
+      "CI_Len": 0.2918,
+      "K_bar": 64
+    },
+    "LOO_AdaptK_BootCV": {
+      "RMSE": 1.0379,
+      "Bias": -0.0199,
+      "SD": 1.0383,
+      "Cover": 0.944,
+      "CI_L": 2.9575,
+      "CI_U": 3.2858,
+      "CI_Len": 0.3283,
+      "K_bar": 50.488
+    },
+    "LOO_BiasAware": {
+      "RMSE": 1.0175,
+      "Bias": 0.0148,
+      "SD": 1.0179,
+      "Cover": 0.96,
+      "CI_L": 2.9772,
+      "CI_U": 3.3356,
+      "CI_Len": 0.3584,
+      "K_bar": 17.091
+    },
+    "Plugin_RateOpt": {
+      "RMSE": 0.0652,
+      "Bias": 0.0351,
+      "SD": 0.055,
+      "Cover": 0.869,
+      "CI_L": 3.0749,
+      "CI_U": 3.2785,
+      "CI_Len": 0.2036,
+      "K_bar": 17.255
+    },
+    "LOO_RateOpt": {
+      "RMSE": 1.0175,
+      "Bias": 0.0148,
+      "SD": 1.0179,
+      "Cover": 0.869,
+      "CI_L": 3.0348,
+      "CI_U": 3.278,
+      "CI_Len": 0.2432,
+      "K_bar": 17.091
+    }
+  },
+  "1000": {
+    "Plugin_FixedK_NormalCV": {
+      "RMSE": 0.0444,
+      "Bias": 0.0029,
+      "SD": 0.0443,
+      "Cover": 0.963,
+      "CI_L": 3.0537,
+      "CI_U": 3.2352,
+      "CI_Len": 0.1815,
+      "K_bar": 64
+    },
+    "Plugin_AdaptK_NormalCV": {
+      "RMSE": 0.047,
+      "Bias": 0.0011,
+      "SD": 0.047,
+      "Cover": 0.952,
+      "CI_L": 3.0476,
+      "CI_U": 3.2378,
+      "CI_Len": 0.1902,
+      "K_bar": 55.293
+    },
+    "Plugin_FixedK_BootCV": {
+      "RMSE": 0.0444,
+      "Bias": 0.0029,
+      "SD": 0.0443,
+      "Cover": 0.961,
+      "CI_L": 3.054,
+      "CI_U": 3.2349,
+      "CI_Len": 0.1809,
+      "K_bar": 64
+    },
+    "Plugin_AdaptK_BootCV": {
+      "RMSE": 0.047,
+      "Bias": 0.0011,
+      "SD": 0.047,
+      "Cover": 0.948,
+      "CI_L": 3.0479,
+      "CI_U": 3.2374,
+      "CI_Len": 0.1894,
+      "K_bar": 55.293
+    },
+    "Plugin_BiasAware": {
+      "RMSE": 0.0483,
+      "Bias": 0.027,
+      "SD": 0.0402,
+      "Cover": 0.955,
+      "CI_L": 3.0664,
+      "CI_U": 3.2707,
+      "CI_Len": 0.2044,
+      "K_bar": 18.004
+    },
+    "LOO_FixedK_NormalCV": {
+      "RMSE": 0.0445,
+      "Bias": 0.0021,
+      "SD": 0.0445,
+      "Cover": 0.97,
+      "CI_L": 3.0489,
+      "CI_U": 3.2383,
+      "CI_Len": 0.1894,
+      "K_bar": 64
+    },
+    "LOO_AdaptK_NormalCV": {
+      "RMSE": 0.0471,
+      "Bias": 0.0018,
+      "SD": 0.0471,
+      "Cover": 0.962,
+      "CI_L": 3.0451,
+      "CI_U": 3.2417,
+      "CI_Len": 0.1966,
+      "K_bar": 54.897
+    },
+    "LOO_FixedK_BootCV": {
+      "RMSE": 0.0445,
+      "Bias": 0.0021,
+      "SD": 0.0445,
+      "Cover": 0.965,
+      "CI_L": 3.0494,
+      "CI_U": 3.2378,
+      "CI_Len": 0.1884,
+      "K_bar": 64
+    },
+    "LOO_AdaptK_BootCV": {
+      "RMSE": 0.0471,
+      "Bias": 0.0018,
+      "SD": 0.0471,
+      "Cover": 0.954,
+      "CI_L": 3.0457,
+      "CI_U": 3.2411,
+      "CI_Len": 0.1954,
+      "K_bar": 54.897
+    },
+    "LOO_BiasAware": {
+      "RMSE": 0.0488,
+      "Bias": 0.0275,
+      "SD": 0.0403,
+      "Cover": 0.96,
+      "CI_L": 3.0663,
+      "CI_U": 3.2719,
+      "CI_Len": 0.2055,
+      "K_bar": 17.844
+    },
+    "Plugin_RateOpt": {
+      "RMSE": 0.0483,
+      "Bias": 0.027,
+      "SD": 0.0402,
+      "Cover": 0.849,
+      "CI_L": 3.0963,
+      "CI_U": 3.2408,
+      "CI_Len": 0.1444,
+      "K_bar": 18.004
+    },
+    "LOO_RateOpt": {
+      "RMSE": 0.0488,
+      "Bias": 0.0275,
+      "SD": 0.0403,
+      "Cover": 0.847,
+      "CI_L": 3.0963,
+      "CI_U": 3.2419,
+      "CI_Len": 0.1455,
+      "K_bar": 17.844
+    }
+  },
+  "2000": {
+    "Plugin_FixedK_NormalCV": {
+      "RMSE": 0.0316,
+      "Bias": 0.0014,
+      "SD": 0.0316,
+      "Cover": 0.943,
+      "CI_L": 3.0786,
+      "CI_U": 3.2074,
+      "CI_Len": 0.1288,
+      "K_bar": 64
+    },
+    "Plugin_AdaptK_NormalCV": {
+      "RMSE": 0.0335,
+      "Bias": 0.0009,
+      "SD": 0.0335,
+      "Cover": 0.95,
+      "CI_L": 3.0739,
+      "CI_U": 3.211,
+      "CI_Len": 0.137,
+      "K_bar": 65.713
+    },
+    "Plugin_FixedK_BootCV": {
+      "RMSE": 0.0316,
+      "Bias": 0.0014,
+      "SD": 0.0316,
+      "Cover": 0.945,
+      "CI_L": 3.0788,
+      "CI_U": 3.2072,
+      "CI_Len": 0.1283,
+      "K_bar": 64
+    },
+    "Plugin_AdaptK_BootCV": {
+      "RMSE": 0.0335,
+      "Bias": 0.0009,
+      "SD": 0.0335,
+      "Cover": 0.947,
+      "CI_L": 3.0741,
+      "CI_U": 3.2109,
+      "CI_Len": 0.1368,
+      "K_bar": 65.713
+    },
+    "Plugin_BiasAware": {
+      "RMSE": 0.0358,
+      "Bias": 0.0182,
+      "SD": 0.0309,
+      "Cover": 0.96,
+      "CI_L": 3.0844,
+      "CI_U": 3.2351,
+      "CI_Len": 0.1507,
+      "K_bar": 21.715
+    },
+    "LOO_FixedK_NormalCV": {
+      "RMSE": 0.0316,
+      "Bias": 0.001,
+      "SD": 0.0316,
+      "Cover": 0.948,
+      "CI_L": 3.0768,
+      "CI_U": 3.2083,
+      "CI_Len": 0.1315,
+      "K_bar": 64
+    },
+    "LOO_AdaptK_NormalCV": {
+      "RMSE": 0.0335,
+      "Bias": 0.0012,
+      "SD": 0.0335,
+      "Cover": 0.953,
+      "CI_L": 3.0731,
+      "CI_U": 3.2125,
+      "CI_Len": 0.1394,
+      "K_bar": 64.869
+    },
+    "LOO_FixedK_BootCV": {
+      "RMSE": 0.0316,
+      "Bias": 0.001,
+      "SD": 0.0316,
+      "Cover": 0.946,
+      "CI_L": 3.0771,
+      "CI_U": 3.208,
+      "CI_Len": 0.131,
+      "K_bar": 64
+    },
+    "LOO_AdaptK_BootCV": {
+      "RMSE": 0.0335,
+      "Bias": 0.0012,
+      "SD": 0.0335,
+      "Cover": 0.949,
+      "CI_L": 3.0734,
+      "CI_U": 3.2122,
+      "CI_Len": 0.1388,
+      "K_bar": 64.869
+    },
+    "LOO_BiasAware": {
+      "RMSE": 0.0364,
+      "Bias": 0.0192,
+      "SD": 0.031,
+      "Cover": 0.957,
+      "CI_L": 3.0853,
+      "CI_U": 3.2363,
+      "CI_Len": 0.151,
+      "K_bar": 21.444
+    },
+    "Plugin_RateOpt": {
+      "RMSE": 0.0358,
+      "Bias": 0.0182,
+      "SD": 0.0309,
+      "Cover": 0.833,
+      "CI_L": 3.1087,
+      "CI_U": 3.2108,
+      "CI_Len": 0.1022,
+      "K_bar": 21.715
+    },
+    "LOO_RateOpt": {
+      "RMSE": 0.0364,
+      "Bias": 0.0192,
+      "SD": 0.031,
+      "Cover": 0.83,
+      "CI_L": 3.1094,
+      "CI_U": 3.2121,
+      "CI_Len": 0.1027,
+      "K_bar": 21.444
+    }
+  },
+  "4000": {
+    "Plugin_FixedK_NormalCV": {
+      "RMSE": 0.0222,
+      "Bias": 0.0003,
+      "SD": 0.0222,
+      "Cover": 0.961,
+      "CI_L": 3.0959,
+      "CI_U": 3.1878,
+      "CI_Len": 0.0919,
+      "K_bar": 64
+    },
+    "Plugin_AdaptK_NormalCV": {
+      "RMSE": 0.0237,
+      "Bias": -0.0004,
+      "SD": 0.0237,
+      "Cover": 0.954,
+      "CI_L": 3.0916,
+      "CI_U": 3.1907,
+      "CI_Len": 0.0991,
+      "K_bar": 81.874
+    },
+    "Plugin_FixedK_BootCV": {
+      "RMSE": 0.0222,
+      "Bias": 0.0003,
+      "SD": 0.0222,
+      "Cover": 0.956,
+      "CI_L": 3.0961,
+      "CI_U": 3.1876,
+      "CI_Len": 0.0915,
+      "K_bar": 64
+    },
+    "Plugin_AdaptK_BootCV": {
+      "RMSE": 0.0237,
+      "Bias": -0.0004,
+      "SD": 0.0237,
+      "Cover": 0.95,
+      "CI_L": 3.0919,
+      "CI_U": 3.1905,
+      "CI_Len": 0.0986,
+      "K_bar": 81.874
+    },
+    "Plugin_BiasAware": {
+      "RMSE": 0.0253,
+      "Bias": 0.0104,
+      "SD": 0.0231,
+      "Cover": 0.964,
+      "CI_L": 3.0946,
+      "CI_U": 3.2093,
+      "CI_Len": 0.1148,
+      "K_bar": 28.187
+    },
+    "LOO_FixedK_NormalCV": {
+      "RMSE": 0.0223,
+      "Bias": 0.0001,
+      "SD": 0.0223,
+      "Cover": 0.961,
+      "CI_L": 3.0953,
+      "CI_U": 3.188,
+      "CI_Len": 0.0928,
+      "K_bar": 64
+    },
+    "LOO_AdaptK_NormalCV": {
+      "RMSE": 0.0238,
+      "Bias": -0.0001,
+      "SD": 0.0238,
+      "Cover": 0.954,
+      "CI_L": 3.0913,
+      "CI_U": 3.1917,
+      "CI_Len": 0.1004,
+      "K_bar": 82.032
+    },
+    "LOO_FixedK_BootCV": {
+      "RMSE": 0.0223,
+      "Bias": 0.0001,
+      "SD": 0.0223,
+      "Cover": 0.958,
+      "CI_L": 3.0955,
+      "CI_U": 3.1878,
+      "CI_Len": 0.0923,
+      "K_bar": 64
+    },
+    "LOO_AdaptK_BootCV": {
+      "RMSE": 0.0238,
+      "Bias": -0.0001,
+      "SD": 0.0238,
+      "Cover": 0.951,
+      "CI_L": 3.0915,
+      "CI_U": 3.1915,
+      "CI_Len": 0.1,
+      "K_bar": 82.032
+    },
+    "LOO_BiasAware": {
+      "RMSE": 0.0254,
+      "Bias": 0.0106,
+      "SD": 0.023,
+      "Cover": 0.964,
+      "CI_L": 3.0947,
+      "CI_U": 3.2097,
+      "CI_Len": 0.115,
+      "K_bar": 28.288
+    },
+    "Plugin_RateOpt": {
+      "RMSE": 0.0253,
+      "Bias": 0.0104,
+      "SD": 0.0231,
+      "Cover": 0.838,
+      "CI_L": 3.1154,
+      "CI_U": 3.1884,
+      "CI_Len": 0.073,
+      "K_bar": 28.187
+    },
+    "LOO_RateOpt": {
+      "RMSE": 0.0254,
+      "Bias": 0.0106,
+      "SD": 0.023,
+      "Cover": 0.841,
+      "CI_L": 3.1156,
+      "CI_U": 3.1888,
+      "CI_Len": 0.0732,
+      "K_bar": 28.288
+    }
+  },
+  "8000": {
+    "Plugin_FixedK_NormalCV": {
+      "RMSE": 0.0165,
+      "Bias": 0.0003,
+      "SD": 0.0165,
+      "Cover": 0.952,
+      "CI_L": 3.1092,
+      "CI_U": 3.1746,
+      "CI_Len": 0.0655,
+      "K_bar": 64
+    },
+    "Plugin_AdaptK_NormalCV": {
+      "RMSE": 0.018,
+      "Bias": 0.0009,
+      "SD": 0.018,
+      "Cover": 0.955,
+      "CI_L": 3.1065,
+      "CI_U": 3.1786,
+      "CI_Len": 0.0721,
+      "K_bar": 94.383
+    },
+    "Plugin_FixedK_BootCV": {
+      "RMSE": 0.0165,
+      "Bias": 0.0003,
+      "SD": 0.0165,
+      "Cover": 0.944,
+      "CI_L": 3.1093,
+      "CI_U": 3.1745,
+      "CI_Len": 0.0652,
+      "K_bar": 64
+    },
+    "Plugin_AdaptK_BootCV": {
+      "RMSE": 0.018,
+      "Bias": 0.0009,
+      "SD": 0.018,
+      "Cover": 0.952,
+      "CI_L": 3.1066,
+      "CI_U": 3.1784,
+      "CI_Len": 0.0718,
+      "K_bar": 94.383
+    },
+    "Plugin_BiasAware": {
+      "RMSE": 0.0212,
+      "Bias": 0.0086,
+      "SD": 0.0194,
+      "Cover": 0.962,
+      "CI_L": 3.1052,
+      "CI_U": 3.1952,
+      "CI_Len": 0.0901,
+      "K_bar": 35.874
+    },
+    "LOO_FixedK_NormalCV": {
+      "RMSE": 0.0165,
+      "Bias": 0.0002,
+      "SD": 0.0165,
+      "Cover": 0.953,
+      "CI_L": 3.1089,
+      "CI_U": 3.1747,
+      "CI_Len": 0.0658,
+      "K_bar": 64
+    },
+    "LOO_AdaptK_NormalCV": {
+      "RMSE": 0.0181,
+      "Bias": 0.0012,
+      "SD": 0.018,
+      "Cover": 0.956,
+      "CI_L": 3.1065,
+      "CI_U": 3.1791,
+      "CI_Len": 0.0726,
+      "K_bar": 94.402
+    },
+    "LOO_FixedK_BootCV": {
+      "RMSE": 0.0165,
+      "Bias": 0.0002,
+      "SD": 0.0165,
+      "Cover": 0.954,
+      "CI_L": 3.109,
+      "CI_U": 3.1746,
+      "CI_Len": 0.0655,
+      "K_bar": 64
+    },
+    "LOO_AdaptK_BootCV": {
+      "RMSE": 0.0181,
+      "Bias": 0.0012,
+      "SD": 0.018,
+      "Cover": 0.957,
+      "CI_L": 3.1067,
+      "CI_U": 3.1789,
+      "CI_Len": 0.0723,
+      "K_bar": 94.402
+    },
+    "LOO_BiasAware": {
+      "RMSE": 0.0212,
+      "Bias": 0.0087,
+      "SD": 0.0193,
+      "Cover": 0.963,
+      "CI_L": 3.105,
+      "CI_U": 3.1956,
+      "CI_Len": 0.0906,
+      "K_bar": 35.859
+    },
+    "Plugin_RateOpt": {
+      "RMSE": 0.0212,
+      "Bias": 0.0086,
+      "SD": 0.0194,
+      "Cover": 0.746,
+      "CI_L": 3.1232,
+      "CI_U": 3.1772,
+      "CI_Len": 0.054,
+      "K_bar": 35.874
+    },
+    "LOO_RateOpt": {
+      "RMSE": 0.0212,
+      "Bias": 0.0087,
+      "SD": 0.0193,
+      "Cover": 0.748,
+      "CI_L": 3.1231,
+      "CI_U": 3.1774,
+      "CI_Len": 0.0543,
+      "K_bar": 35.859
+    }
+  }
+}
