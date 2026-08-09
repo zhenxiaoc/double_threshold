@@ -1,0 +1,22 @@
+# TEMPLATE for the energy-rebate experiment (Ida/Ishihara/Ito/Kido/Kitagawa/Sakaguchi/Sasaki).
+# GATED: the household smart-meter microdata is proprietary/non-redistributable and is NOT
+# bundled.  If access is granted (see docs/data_access_blockers.md), place the unit-level file
+# at data/raw/energy.csv with the columns below and run: python -m path_welfare.cli audit --config configs/energy.yaml
+name: energy_rebate
+dataset: energy                 # expects data/raw/energy.csv (never committed)
+outcome_units: "kWh peak-period electricity (negative = conservation)"
+seed: 20260713
+variables:
+  S: log_pre_peak_kwh           # log mean pre-experiment peak-period use
+  T1: period1_rebate            # 1 = rebate assigned in period 1
+  X: log_period1_peak_kwh       # log mean period-1 peak-period use (post T1, pre T2)
+  T2: period2_rebate            # 1 = rebate assigned in period 2
+  Y: neg_period2_peak_kwh       # negative period-2 peak use (higher = more conservation)
+  group: household_id
+  site: region                  # Kansai / Chubu
+treatment_probs:
+  e1: 0.5                       # balanced 2x2 design (verify exact value from protocol)
+  e2: 0.5
+transforms:
+  S: identity                   # already logged upstream
+  X: identity

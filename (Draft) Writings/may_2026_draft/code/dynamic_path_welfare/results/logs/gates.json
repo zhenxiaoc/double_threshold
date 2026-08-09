@@ -1,0 +1,18 @@
+{
+  "passed": true,
+  "n_units": 2000,
+  "path_counts": {
+    "00": 503,
+    "01": 516,
+    "10": 527,
+    "11": 454
+  },
+  "outcome_availability": 1.0,
+  "smallest_prob": 0.485,
+  "failures": [],
+  "warnings": [],
+  "s_unique": 2000,
+  "x_unique": 2000,
+  "s_max_point_mass": 0.0005,
+  "x_max_point_mass": 0.0005
+}

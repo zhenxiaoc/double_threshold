@@ -1,0 +1,36 @@
+[train] 3-WGAN cascade on 2 covariates (GAN1 X, GAN2 S|X,W, GAN3 Y|S,X,W) ...
+    [GAN1] X  (2 continuous + 0 categorical) ...
+      epoch     0/8000  W~+0.0298
+      epoch  1600/8000  W~+0.2332
+      epoch  3200/8000  W~+0.1926
+      epoch  4800/8000  W~+0.1004
+      epoch  6400/8000  W~+0.0847
+      epoch  7999/8000  W~+0.1133
+    [GAN2] S | X, W  (1 continuous + 0 categorical, n=854) ...
+      epoch     0/10000  W~+0.0058
+      epoch  2000/10000  W~-0.0139
+      epoch  4000/10000  W~+0.1533
+      epoch  6000/10000  W~+0.0616
+      epoch  8000/10000  W~+0.0485
+      epoch  9999/10000  W~+0.0529
+    [GAN3] Y | S(1-dim), X, W  (n=854) ...
+      epoch     0/8000  W~+0.0003
+      epoch  1600/8000  W~+0.0356
+      epoch  3200/8000  W~+0.0856
+      epoch  4800/8000  W~+0.1103
+      epoch  6400/8000  W~+0.0516
+      epoch  7999/8000  W~+0.1795
+    [truth] population 100,000 draws x M=300 CRN noise ...
+[train] done in 324s; saving -> C:\Users\陈震霄\Dropbox\Zhenxiao\JMP\code\surrogate_harm_share\results\wgan\wgan_oracle_2d_scalar.npz
+
+[truth] WGAN population truth:
+   theta_harm=0.1939  treatS=0.796  ATE_S=8.84  ATE_Y=-0.27  W_Y=4.19
+
+[fidelity] real vs generated, all 4 variables (original units):
+   ctotal_pcmonth_bsl       mean     134.47/    130.50  sd    148.11/   134.94
+   asset_index_bsl          mean       0.06/      0.64  sd      1.72/     3.67
+   S                        mean      93.61/     94.30  sd     55.46/    53.05
+   Y                        mean      87.42/     89.04  sd     53.12/    52.05
+   correlation match across all variables: mean|Δ|=0.034
+
+[done] wrote C:\Users\陈震霄\Dropbox\Zhenxiao\JMP\code\surrogate_harm_share\results\logs\wgan_calibration_2d_scalar.json;  run make_wgan_figures.py for the full validation exhibit.

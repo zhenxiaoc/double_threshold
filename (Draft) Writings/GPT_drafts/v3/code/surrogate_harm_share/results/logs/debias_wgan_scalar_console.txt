@@ -1,0 +1,31 @@
+wgan2ds truth: 0.1939
+[wgan2ds]
+    n=1000: 285s
+              cf_gbr bias=+0.0452 sd=0.0434 rmse=0.0626 se_ratio=2.17 cov=0.960
+        cf_riesz_gbr bias=+0.0492 sd=0.1242 rmse=0.1335 se_ratio=0.76 cov=0.910
+              dd_gbr bias=+0.0609 sd=0.1413 rmse=0.1537 se_ratio=0.67 cov=0.772
+              plugin bias=+0.0645 sd=0.1008 rmse=0.1195 se_ratio=1.34 cov=0.956
+                  ss bias=+0.0655 sd=0.1370 rmse=0.1518 se_ratio=0.98 cov=0.876
+          ss_margins bias=+0.0435 sd=0.1396 rmse=0.1461 se_ratio=0.96 cov=0.886
+    n=2000: 279s
+              cf_gbr bias=+0.0463 sd=0.0359 rmse=0.0585 se_ratio=1.18 cov=0.840
+        cf_riesz_gbr bias=+0.0411 sd=0.0417 rmse=0.0585 se_ratio=1.02 cov=0.840
+              dd_gbr bias=+0.0446 sd=0.0703 rmse=0.0832 se_ratio=0.60 cov=0.656
+              plugin bias=+0.0592 sd=0.0884 rmse=0.1063 se_ratio=1.15 cov=0.928
+                  ss bias=+0.0519 sd=0.1213 rmse=0.1318 se_ratio=0.84 cov=0.868
+          ss_margins bias=+0.0373 sd=0.1236 rmse=0.1290 se_ratio=0.82 cov=0.866
+    n=4000: 357s
+              cf_gbr bias=+0.0469 sd=0.0318 rmse=0.0567 se_ratio=1.03 cov=0.726
+        cf_riesz_gbr bias=+0.0456 sd=0.0335 rmse=0.0566 se_ratio=0.98 cov=0.718
+              dd_gbr bias=+0.0336 sd=0.0570 rmse=0.0661 se_ratio=0.57 cov=0.660
+              plugin bias=+0.0470 sd=0.0618 rmse=0.0776 se_ratio=1.23 cov=0.936
+                  ss bias=+0.0363 sd=0.0780 rmse=0.0859 se_ratio=0.98 cov=0.910
+          ss_margins bias=+0.0275 sd=0.0782 rmse=0.0828 se_ratio=0.97 cov=0.918
+    n=8000: 413s
+              cf_gbr bias=+0.0415 sd=0.0276 rmse=0.0499 se_ratio=0.97 cov=0.656
+        cf_riesz_gbr bias=+0.0416 sd=0.0280 rmse=0.0501 se_ratio=0.95 cov=0.632
+              dd_gbr bias=+0.0209 sd=0.0446 rmse=0.0492 se_ratio=0.60 cov=0.702
+              plugin bias=+0.0317 sd=0.0453 rmse=0.0552 se_ratio=1.13 cov=0.952
+                  ss bias=+0.0206 sd=0.0535 rmse=0.0573 se_ratio=0.96 cov=0.930
+          ss_margins bias=+0.0152 sd=0.0537 rmse=0.0557 se_ratio=0.95 cov=0.940
+done -> C:\Users\陈震霄\Dropbox\Zhenxiao\JMP\code\surrogate_harm_share\results\tables\debias_study_wgan2ds.csv

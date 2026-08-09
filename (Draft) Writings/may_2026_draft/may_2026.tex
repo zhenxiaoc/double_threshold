@@ -1,0 +1,1303 @@
+\documentclass[12pt]{article}
+
+\usepackage[margin=1in]{geometry}
+\usepackage{setspace}
+\usepackage{amsmath,amssymb,amsthm,mathtools,bm}
+\usepackage{enumitem}
+\usepackage{natbib}
+\usepackage[colorlinks=true,linkcolor=blue,citecolor=blue,urlcolor=blue]{hyperref}
+\usepackage{booktabs}
+\usepackage{microtype}
+\usepackage{mathtools}
+\usepackage{bbm}
+
+\onehalfspacing
+
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{corollary}[theorem]{Corollary}
+\newtheorem{assumption}[theorem]{Assumption}
+\newtheorem{definition}[theorem]{Definition}
+\newtheorem{remark}[theorem]{Remark}
+
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\E}{\mathbb{E}}
+\newcommand{\Prob}{\mathbb{P}}
+\newcommand{\1}{\mathbf{1}}
+\newcommand{\dd}{\,\mathrm{d}}
+\newcommand{\B}{\mathcal{B}}
+\newcommand{\Aone}{A_1}
+\newcommand{\Azero}{A_0}
+\newcommand{\czero}{c_0}
+\newcommand{\norm}[1]{\left\lVert #1 \right\rVert}
+\newcommand{\abs}[1]{\left\lvert #1 \right\rvert}
+\newcommand{\inner}[2]{\left\langle #1, #2 \right\rangle}
+\newcommand{\Haus}{\mathcal{H}}
+\newcommand{\BTED}{\operatorname{BTED}}
+\newcommand{\BMTTE}{\operatorname{BMTTE}}
+\newcommand{\BATEC}{\operatorname{BATEC}}
+\newcommand{\argmax}{\operatorname*{arg\,max}}
+\newcommand{\argmin}{\operatorname*{arg\,min}}
+
+\title{Inference on Policy Value under Admissibility-Constrained Optimal Treatment Rules\thanks{Thank everyone.}}
+\author{Zhenxiao Chen\thanks{Department of Economics, University of Pennsylvania,
+%133 S 36th St., Philadelphia, PA 19104, 
+USA, zxchen@upenn.edu.}}
+\date{\today}
+
+\begin{document}
+\maketitle
+
+\begin{abstract}
+\end{abstract}
+
+\tableofcontents
+
+\section{Introduction}
+\subsection{Questions}
+How to handle smoother?
+
+\subsection{Why Point-Wise Admissibility?}
+In many economic problems, a treatment will usually lead to multiple consequences, some of them are favorable to the social planner, while others are not.
+
+Among those unfavorable consequences, some of them could be compensated by a good outcome, while others are hard to trade off. Consider the example of the long-term and short-term outcomes. The social planner may be able to trade off some short term loss for long-term benefit for workers in a job training program. Now consider the other scenario where the treatment is a drug and two outcomes are health benefit and side effects, then a social planner might not want to a bad side effect in order to obtain a good health outcome.
+
+The nature of non-compensatory and compensatory outcomes due to a treatment leads to different types social planner's problem, one with a soft constraint, while the other with a hard threshold constraint
+
+Non-compensatory makes it
+
+global to local
+
+And a hard threshold is what leads to point-wise admissibility.
+
+The policy class is constrained to be decision trees. This is studied in Atehy's paper. And there is Christensen's paper on generated regressors for latent covariates using machine learning. So splitting can happen based on latent covaraites. If the 
+
+necessary condtion 
+
+in the ethics of modern medicine, the Hippocratic principle of “do no harm” remains influential
+
+If we think of the policy learning problem as eliminating those people who will not benefit as much 
+
+
+\subsection{Motivation 1: Psychology}
+\subsection{Motivation 3: Marketing}
+\subsection{Motivation 2: Micro theory}
+There is a literature on sequential screening. The idea is that a social planner has an ordered-checklist of finite length regarding proprieties of the target population, and she goes through the checklist sequentially to discriminate among available alternatives. 
+
+One example is a decision maker who considers a treatment allocation task successful only if treated unit not only benefit from the intervention directly but also the benefit will be long lasting. In other words, a positive long-term conditional average treatment effect is a necessary condition for a successful treatment allocation. 
+
+Usually, the order of elimination matters, but under the condition that the checklist has a finite length and the survivor set is nonempty after each round of elimination, the agent faces a utility function and preference.
+
+What hides underneath the premise of sequential elimination is the social planner's tendency to not trade off between earlier and later properties. 
+
+\section{Examples}
+
+\subsection{Severe Side Effects}
+In drug assignment, efficacy and side effects need not enter the planner’s problem symmetrically. Mild side effects may be treated as ordinary costs and incorporated into a net health-benefit margin. Severe adverse events, however, often operate as safety constraints rather than as prices in a welfare index. A regulator or public health planner may be unwilling to recommend a drug to a subgroup whose risk of a serious side effect exceeds an acceptable level, even if the expected therapeutic gain is large. This reflects a minimum safety requirement: treatment must be beneficial, but it must also be safe enough. 
+
+\subsection{Strict Overlap}
+In a population where only overlap is met, it might be sensible to focus on a subpopulation where strict overlap is satisfied. This is because the asymptotic variance is controlled.
+
+
+
+\subsection{Dynamic Treatment Regime}
+\label{subsec:dynamic_treatment_regime}
+
+We consider a two-period treatment assignment problem. Let $S$ denote the
+first-period state, let $T_1\in\{0,1\}$ denote the first-period treatment, let
+$X$ denote the second-period state, let $T_2\in\{0,1\}$ denote the second-period
+treatment, and let $Y$ denote the final outcome. A first-period policy is a
+measurable map $\pi_1:\mathcal S\to\{0,1\}$, and a second-period policy is a
+measurable map $\pi_2:\mathcal X\to\{0,1\}$. For static treatment assignments
+$(\tau_1,\tau_2)\in\{0,1\}^2$, write $Y^{(\tau_1,\tau_2)}$ for the potential
+final outcome. We also write $X^{(\tau_1)}$ for the potential second-period
+state that would be realized under first-period treatment $\tau_1$.
+
+Given a second-period policy $\pi_2$, define the potential outcome under
+first-period action $\tau_1$ and second-period policy $\pi_2$ by
+\[
+Y^{(\tau_1,\pi_2)}
+:=
+\sum_{\tau_2\in\{0,1\}}
+\mathbbm 1\left\{\pi_2\left(X^{(\tau_1)}\right)=\tau_2\right\}
+Y^{(\tau_1,\tau_2)}.
+\]
+Similarly, for a pair of policies $\pi=(\pi_1,\pi_2)$, define
+\[
+Y^{(\pi_1,\pi_2)}
+:=
+\sum_{\tau_1\in\{0,1\}}
+\mathbbm 1\{\pi_1(S)=\tau_1\}
+Y^{(\tau_1,\pi_2)}.
+\]
+The policy value is
+\[
+V(\pi_1,\pi_2)
+:=
+\mathbb E\!\left[Y^{(\pi_1,\pi_2)}\right].
+\]
+The object of interest is an optimal regime
+\[
+(\pi_1^*,\pi_2^*)
+\in
+\operatorname*{arg\,max}_{(\pi_1,\pi_2)}V(\pi_1,\pi_2),
+\]
+and the corresponding optimal value is denoted by
+\[
+V^*:=V(\pi_1^*,\pi_2^*).
+\]
+
+\begin{assumption}[Sequential Independence, Markov Sufficiency, and Consistency]
+\label{ass:sequential_independence_markov}
+The following conditions hold.
+\begin{enumerate}
+    \item \textbf{Consistency.} If $T_1=\tau_1$, then
+    \[
+    X=X^{(\tau_1)}.
+    \]
+    If $(T_1,T_2)=(\tau_1,\tau_2)$, then
+    \[
+    Y=Y^{(\tau_1,\tau_2)}.
+    \]
+
+    \item \textbf{First-period sequential independence.} For every
+    $\tau_1\in\{0,1\}$ and every admissible second-period policy $\pi_2$,
+    \[
+    \left(X^{(\tau_1)},Y^{(\tau_1,\pi_2)}\right)
+    \perp T_1\mid S.
+    \]
+
+    \item \textbf{Second-period sequential independence.} For every
+    $\tau_1,\tau_2\in\{0,1\}$,
+    \[
+    Y^{(\tau_1,\tau_2)}\perp T_2
+    \mid S,T_1=\tau_1,X.
+    \]
+
+    \item \textbf{Markov sufficiency.} Conditional on the second-period
+    state $X$ and second-period treatment $T_2$, the conditional mean of the
+    final outcome does not depend on the earlier history:
+    \[
+    \mathbb E[Y\mid S=s,T_1=\tau_1,X=x,T_2=\tau_2]
+    =
+    \mathbb E[Y\mid X=x,T_2=\tau_2].
+    \]
+
+    \item \textbf{Positivity.} For all relevant states $s,x$ and all
+    $\tau_1,\tau_2\in\{0,1\}$,
+    \[
+    \mathbb P(T_1=\tau_1\mid S=s)>0,
+    \qquad
+    \mathbb P(T_2=\tau_2\mid S=s,T_1=\tau_1,X=x)>0.
+    \]
+\end{enumerate}
+\end{assumption}
+
+We use the following notation. Let $d_x:=\dim(\mathcal X)$ and
+$d_s:=\dim(\mathcal S)$. For $a\in\{0,1\}$, define
+\[
+p_a(x\mid s)
+:=
+f_{X\mid S,T_1=a}(x\mid s),
+\qquad
+r(x\mid s)
+:=
+p_1(x\mid s)-p_0(x\mid s),
+\qquad
+m(s)
+:=
+f_S(s).
+\]
+Let
+\[
+\mu_a(x):=\mathbb E[Y\mid X=x,T_2=a],
+\qquad
+\delta(x):=\mu_1(x)-\mu_0(x).
+\]
+Define the second-stage treated region, untreated region, and margin by
+\[
+D_2^+ := \{x\in\mathcal X:\delta(x)\geq 0\},
+\qquad
+D_2^- := \{x\in\mathcal X:\delta(x)<0\},
+\qquad
+M_2 := \{x\in\mathcal X:\delta(x)=0\}.
+\]
+The second-stage value function is
+\[
+V_2(x)
+:=
+\max\{\mu_0(x),\mu_1(x)\}
+=
+\mu_0(x)+[\delta(x)]_+.
+\]
+For $a\in\{0,1\}$, define the continuation value
+\[
+A_a(s)
+:=
+\mathbb E[V_2(X)\mid S=s,T_1=a]
+=
+\int_{\mathcal X}V_2(x)p_a(x\mid s)\,\mathrm dx.
+\]
+The first-stage contrast is
+\begin{align*}
+\kappa(s)
+&:=
+A_1(s)-A_0(s) \\
+&=
+\mathbb E[V_2(X)\mid S=s,T_1=1]
+-
+\mathbb E[V_2(X)\mid S=s,T_1=0] \\
+&=
+\int_{\mathcal X}V_2(x)\{p_1(x\mid s)-p_0(x\mid s)\}\,\mathrm dx \\
+&=
+\int_{\mathcal X}V_2(x)r(x\mid s)\,\mathrm dx.
+\end{align*}
+Define the first-stage treated region, untreated region, and margin by
+\[
+D_1^+ := \{s\in\mathcal S:\kappa(s)\geq 0\},
+\qquad
+D_1^- := \{s\in\mathcal S:\kappa(s)<0\},
+\qquad
+M_1 := \{s\in\mathcal S:\kappa(s)=0\}.
+\]
+The strict inequalities in $D_1^-$ and $D_2^-$ encode the tie-breaking
+convention that action $1$ is chosen on the margin.
+
+\begin{proposition}[Characterization of the Optimal Sequential Regime]
+\label{prop:characterize_optimal_regime}
+Suppose Assumption \ref{ass:sequential_independence_markov} holds. An optimal
+second-period policy satisfies
+\[
+\pi_2^*(x)
+\in
+\operatorname*{arg\,max}_{\tau_2\in\{0,1\}}
+\mu_{\tau_2}(x).
+\]
+Moreover, an optimal first-period policy satisfies
+\[
+\pi_1^*(s)
+\in
+\operatorname*{arg\,max}_{\tau_1\in\{0,1\}}
+\mathbb E[V_2(X)\mid S=s,T_1=\tau_1].
+\]
+Equivalently, under the tie-breaking convention that action $1$ is chosen
+whenever the two actions have equal value,
+\[
+\mathbbm 1\{\pi_2^*(X)=1\}
+=
+\mathbbm 1\{\delta(X)\geq 0\},
+\]
+and
+\[
+\mathbbm 1\{\pi_1^*(S)=1\}
+=
+\mathbbm 1\{\kappa(S)\geq 0\}.
+\]
+\end{proposition}
+
+The optimal value admits the following decomposition into treatment-path
+components:
+\begin{align*}
+V^*
+&=
+\mathbb E\!\left[
+Y^{(0,0)}
+\mathbbm 1\{\pi_1^*(S)=0,\pi_2^*(X^{(0)})=0\}
+\right] \\
+&\quad+
+\mathbb E\!\left[
+Y^{(1,0)}
+\mathbbm 1\{\pi_1^*(S)=1,\pi_2^*(X^{(1)})=0\}
+\right] \\
+&\quad+
+\mathbb E\!\left[
+Y^{(0,1)}
+\mathbbm 1\{\pi_1^*(S)=0,\pi_2^*(X^{(0)})=1\}
+\right] \\
+&\quad+
+\mathbb E\!\left[
+Y^{(1,1)}
+\mathbbm 1\{\pi_1^*(S)=1,\pi_2^*(X^{(1)})=1\}
+\right].
+\end{align*}
+The total welfare $V^*$ is the value studied in optimal dynamic treatment
+regime problems such as \cite{chen2023optimaldynamic}. The individual
+treatment-path components can also be economically relevant, because they
+measure the welfare generated by different subpopulations under the optimal
+regime. The distinction between total welfare and its path components is
+important for inference: as shown below, the path components generally contain
+lower-dimensional boundary terms, while these boundary terms cancel in the
+derivative of the total welfare.
+
+We first analyze the $(1,1)$ component. Define
+\[
+V_{11}^*
+:=
+\mathbb E\!\left[
+Y^{(1,1)}
+\mathbbm 1\{\pi_1^*(S)=1,\pi_2^*(X^{(1)})=1\}
+\right],
+\]
+and
+\[
+G_{11}(s)
+:=
+\int_{D_2^+}\mu_1(x)p_1(x\mid s)\,\mathrm dx.
+\]
+Then
+\[
+V_{11}^*
+=
+\int_{D_1^+}G_{11}(s)m(s)\,\mathrm ds
+=
+\int_{D_1^+}\int_{D_2^+}
+\mu_1(x)p_1(x\mid s)m(s)\,\mathrm dx\,\mathrm ds.
+\]
+
+The identifying representation of $V_{11}^*$ is obtained as follows:
+\begin{align*}
+V_{11}^*
+&=
+\mathbb E\!\left[
+Y^{(1,1)}
+\mathbbm 1\{\pi_1^*(S)=1,\pi_2^*(X^{(1)})=1\}
+\right] \\
+&=
+\int_{\mathcal S}
+\int_{\mathcal X}
+\mathbbm 1\{\pi_1^*(s)=1\}
+\mathbbm 1\{\pi_2^*(x)=1\}
+\mathbb E[Y^{(1,1)}\mid S=s,X^{(1)}=x] \\
+&\qquad\qquad\qquad\qquad
+\times f_{X^{(1)}\mid S}(x\mid s)m(s)\,\mathrm dx\,\mathrm ds \\
+&=
+\int_{\mathcal S}
+\int_{\mathcal X}
+\mathbbm 1\{\pi_1^*(s)=1\}
+\mathbbm 1\{\pi_2^*(x)=1\}
+\mathbb E[Y\mid S=s,T_1=1,X=x,T_2=1] \\
+&\qquad\qquad\qquad\qquad
+\times p_1(x\mid s)m(s)\,\mathrm dx\,\mathrm ds \\
+&=
+\int_{\mathcal S}
+\int_{\mathcal X}
+\mathbbm 1\{\pi_1^*(s)=1\}
+\mathbbm 1\{\pi_2^*(x)=1\}
+\mathbb E[Y\mid X=x,T_2=1] \\
+&\qquad\qquad\qquad\qquad
+\times p_1(x\mid s)m(s)\,\mathrm dx\,\mathrm ds \\
+&=
+\int_{\mathcal S}
+\int_{\mathcal X}
+\mathbbm 1\{\delta(x)\geq 0\}
+\mathbbm 1\{\kappa(s)\geq 0\}
+\mu_1(x)p_1(x\mid s)m(s)\,\mathrm dx\,\mathrm ds \\
+&=
+\int_{D_1^+}\int_{D_2^+}
+\mu_1(x)p_1(x\mid s)m(s)\,\mathrm dx\,\mathrm ds.
+\end{align*}
+The second line writes the potential outcome expectation by conditioning on
+the potential second-period state. The third line uses consistency, sequential
+independence, positivity, and the identified law
+$f_{X^{(1)}\mid S}(x\mid s)=p_1(x\mid s)$. The fourth line uses Markov
+sufficiency. The last two lines substitute the threshold characterizations of
+$\pi_1^*$ and $\pi_2^*$ and then rewrite the indicator functions as integration
+regions.
+
+We now compute the pathwise derivative of $V_{11}^*$ with respect to
+$\mu_0$ and $\mu_1$, holding $p_a$ and $m$ fixed. Let
+\[
+\mu_{a,t}:=\mu_a+t\dot\mu_a,
+\qquad a\in\{0,1\},
+\]
+and define
+\[
+\delta_t(x):=\mu_{1,t}(x)-\mu_{0,t}(x),
+\qquad
+\dot\delta(x):=\dot\mu_1(x)-\dot\mu_0(x).
+\]
+Let
+\[
+D_{2,t}^+ := \{x\in\mathcal X:\delta_t(x)\geq 0\},
+\qquad
+D_{2,t}^- := \{x\in\mathcal X:\delta_t(x)<0\},
+\]
+and
+\[
+V_{2,t}(x)
+:=
+\max\{\mu_{0,t}(x),\mu_{1,t}(x)\}
+=
+\mu_{0,t}(x)+[\delta_t(x)]_+.
+\]
+For the $(1,1)$ component, set
+\[
+G_{11,t}(s)
+:=
+\int_{D_{2,t}^+}\mu_{1,t}(x)p_1(x\mid s)\,\mathrm dx.
+\]
+
+We maintain the following regular-margin conditions for the derivative
+calculations. The functions $\delta$ and $\kappa$ are continuously
+differentiable in neighborhoods of $M_2$ and $M_1$, respectively; $0$ is a
+regular value of both functions; and
+\[
+\lVert\nabla_x\delta(x)\rVert>0
+\quad\text{for all }x\in M_2,
+\qquad
+\lVert\nabla_s\kappa(s)\rVert>0
+\quad\text{for all }s\in M_1.
+\]
+Thus $M_2$ and $M_1$ are smooth $(d_x-1)$- and $(d_s-1)$-dimensional level
+sets, respectively. Under these conditions, the moving-boundary formula gives,
+for a generic smooth perturbation $h_t=h+t\dot h$ and integrand $q_t$,
+\[
+\left.
+\frac{\mathrm d}{\mathrm dt}
+\int_{\{z:h_t(z)\geq 0\}}q_t(z)\,\mathrm dz
+\right|_{t=0}
+=
+\int_{\{z:h(z)\geq 0\}}\dot q(z)\,\mathrm dz
++
+\int_{\{z:h(z)=0\}}
+\frac{\dot h(z)q(z)}
+{\lVert\nabla h(z)\rVert}
+\,\mathrm d\mathcal H^{d-1}(z),
+\]
+with the sign of the boundary term reversed for the region $\{z:h_t(z)<0\}$.
+
+Applying this formula to $G_{11,t}$ yields
+\begin{align*}
+\dot G_{11}(s)
+&:=
+\left.\frac{\mathrm d}{\mathrm dt}G_{11,t}(s)\right|_{t=0} \\
+&=
+\int_{D_2^+}\dot\mu_1(x)p_1(x\mid s)\,\mathrm dx
++
+\int_{M_2}
+\frac{\dot\delta(x)\mu_1(x)p_1(x\mid s)}
+{\lVert\nabla_x\delta(x)\rVert}
+\,\mathrm d\mathcal H^{d_x-1}(x).
+\end{align*}
+The first term differentiates the integrand with the region held fixed. The
+second term is the first-order contribution from the movement of the
+second-stage decision boundary $M_2$. This is the step that uses the
+regular-margin condition for $\delta$; the rest is ordinary differentiation
+under the integral sign.
+
+Next define
+\[
+\kappa_t(s)
+:=
+\int_{\mathcal X}V_{2,t}(x)r(x\mid s)\,\mathrm dx.
+\]
+Using $V_{2,t}(x)=\mu_{0,t}(x)+[\delta_t(x)]_+$, we have
+\begin{align*}
+\kappa_t(s)
+&=
+\int_{\mathcal X}\mu_{0,t}(x)r(x\mid s)\,\mathrm dx
++
+\int_{D_{2,t}^+}\delta_t(x)r(x\mid s)\,\mathrm dx.
+\end{align*}
+Therefore,
+\begin{align*}
+\dot\kappa(s)
+&:=
+\left.\frac{\mathrm d}{\mathrm dt}\kappa_t(s)\right|_{t=0} \\
+&=
+\int_{\mathcal X}\dot\mu_0(x)r(x\mid s)\,\mathrm dx
++
+\int_{D_2^+}\dot\delta(x)r(x\mid s)\,\mathrm dx \\
+&\quad+
+\int_{M_2}
+\frac{\dot\delta(x)\delta(x)r(x\mid s)}
+{\lVert\nabla_x\delta(x)\rVert}
+\,\mathrm d\mathcal H^{d_x-1}(x) \\
+&=
+\int_{\mathcal X}\dot\mu_0(x)r(x\mid s)\,\mathrm dx
++
+\int_{D_2^+}\{\dot\mu_1(x)-\dot\mu_0(x)\}r(x\mid s)\,\mathrm dx \\
+&=
+\int_{D_2^+}\dot\mu_1(x)r(x\mid s)\,\mathrm dx
++
+\int_{D_2^-}\dot\mu_0(x)r(x\mid s)\,\mathrm dx.
+\end{align*}
+The third line contains the moving-boundary term from $D_{2,t}^+$, but it
+vanishes because $\delta(x)=0$ on $M_2$. The fourth line substitutes
+$\dot\delta=\dot\mu_1-\dot\mu_0$. The last line is an algebraic regrouping,
+using that $M_2$ has zero $d_x$-dimensional Lebesgue measure under the
+regular-margin condition.
+
+Finally, define
+\[
+D_{1,t}^+ := \{s\in\mathcal S:\kappa_t(s)\geq 0\},
+\qquad
+V_{11,t}^*
+:=
+\int_{D_{1,t}^+}G_{11,t}(s)m(s)\,\mathrm ds.
+\]
+Then
+\begin{align*}
+\dot V_{11}^*
+&:=
+\left.\frac{\mathrm d}{\mathrm dt}V_{11,t}^*\right|_{t=0} \\
+&=
+\int_{D_1^+}\dot G_{11}(s)m(s)\,\mathrm ds
++
+\int_{M_1}
+\frac{\dot\kappa(s)G_{11}(s)m(s)}
+{\lVert\nabla_s\kappa(s)\rVert}
+\,\mathrm d\mathcal H^{d_s-1}(s) \\
+&=
+\int_{D_1^+}
+\left[
+\int_{D_2^+}\dot\mu_1(x)p_1(x\mid s)\,\mathrm dx
++
+\int_{M_2}
+\frac{\dot\delta(x)\mu_1(x)p_1(x\mid s)}
+{\lVert\nabla_x\delta(x)\rVert}
+\,\mathrm d\mathcal H^{d_x-1}(x)
+\right]
+m(s)\,\mathrm ds \\
+&\quad+
+\int_{M_1}
+\frac{G_{11}(s)m(s)}
+{\lVert\nabla_s\kappa(s)\rVert}
+\left[
+\int_{\mathcal X}\dot\mu_0(x)r(x\mid s)\,\mathrm dx
++
+\int_{D_2^+}\{\dot\mu_1(x)-\dot\mu_0(x)\}r(x\mid s)\,\mathrm dx
+\right]
+\,\mathrm d\mathcal H^{d_s-1}(s) \\
+&=
+\int_{D_1^+}\int_{D_2^+}
+\dot\mu_1(x)p_1(x\mid s)m(s)\,\mathrm dx\,\mathrm ds \\
+&\quad+
+\int_{D_1^+}\int_{M_2}
+\frac{\dot\delta(x)\mu_1(x)p_1(x\mid s)}
+{\lVert\nabla_x\delta(x)\rVert}
+m(s)
+\,\mathrm d\mathcal H^{d_x-1}(x)\,\mathrm ds \\
+&\quad+
+\int_{M_1}
+\frac{\dot\kappa(s)G_{11}(s)m(s)}
+{\lVert\nabla_s\kappa(s)\rVert}
+\,\mathrm d\mathcal H^{d_s-1}(s).
+\end{align*}
+The first equality uses the moving-boundary derivative for the first-stage
+region $D_{1,t}^+$ and therefore uses the regular-margin condition for
+$\kappa$. The next equality substitutes the formulas for $\dot G_{11}(s)$ and
+$\dot\kappa(s)$. The final equality only separates the full-dimensional
+Lebesgue integral from the two lower-dimensional Hausdorff integrals.
+
+The derivative of $V_{11}^*$ therefore contains three terms. The first is an
+ordinary interior term: it perturbs $\mu_1$ for states that remain on the
+$(1,1)$ path. The second is a second-stage boundary term: it accounts for the
+infinitesimal mass of second-stage states crossing $M_2$. The third is a
+first-stage boundary term: it accounts for the infinitesimal mass of
+first-stage states crossing $M_1$. The factors
+$\dot\delta(x)/\lVert\nabla_x\delta(x)\rVert$ and
+$\dot\kappa(s)/\lVert\nabla_s\kappa(s)\rVert$ are the normal velocities of
+the corresponding decision boundaries.
+
+We now show why the total welfare does not contain these lower-dimensional
+terms, even though its individual path components do. For each
+$a\in\{0,1\}$, write
+\begin{align*}
+A_a(s)
+&=
+\mathbb E[V_2(X)\mid S=s,T_1=a] \\
+&=
+\int_{\mathcal X}
+\left[
+\mu_1(x)\mathbbm 1\{\delta(x)\geq 0\}
++
+\mu_0(x)\mathbbm 1\{\delta(x)<0\}
+\right]
+p_a(x\mid s)\,\mathrm dx \\
+&=
+\int_{D_2^+}\mu_1(x)p_a(x\mid s)\,\mathrm dx
++
+\int_{D_2^-}\mu_0(x)p_a(x\mid s)\,\mathrm dx.
+\end{align*}
+Let
+\[
+A_{a,t}(s)
+:=
+\int_{D_{2,t}^+}\mu_{1,t}(x)p_a(x\mid s)\,\mathrm dx
++
+\int_{D_{2,t}^-}\mu_{0,t}(x)p_a(x\mid s)\,\mathrm dx.
+\]
+Applying the moving-boundary formula to both $D_{2,t}^+$ and $D_{2,t}^-$ gives
+\begin{align*}
+\dot A_a(s)
+&:=
+\left.\frac{\mathrm d}{\mathrm dt}A_{a,t}(s)\right|_{t=0} \\
+&=
+\int_{D_2^+}\dot\mu_1(x)p_a(x\mid s)\,\mathrm dx
++
+\int_{M_2}
+\frac{\dot\delta(x)\mu_1(x)p_a(x\mid s)}
+{\lVert\nabla_x\delta(x)\rVert}
+\,\mathrm d\mathcal H^{d_x-1}(x) \\
+&\quad+
+\int_{D_2^-}\dot\mu_0(x)p_a(x\mid s)\,\mathrm dx
+-
+\int_{M_2}
+\frac{\dot\delta(x)\mu_0(x)p_a(x\mid s)}
+{\lVert\nabla_x\delta(x)\rVert}
+\,\mathrm d\mathcal H^{d_x-1}(x) \\
+&=
+\int_{D_2^+}\dot\mu_1(x)p_a(x\mid s)\,\mathrm dx
++
+\int_{D_2^-}\dot\mu_0(x)p_a(x\mid s)\,\mathrm dx \\
+&\quad+
+\int_{M_2}
+\frac{\dot\delta(x)\{\mu_1(x)-\mu_0(x)\}p_a(x\mid s)}
+{\lVert\nabla_x\delta(x)\rVert}
+\,\mathrm d\mathcal H^{d_x-1}(x) \\
+&=
+\int_{D_2^+}\dot\mu_1(x)p_a(x\mid s)\,\mathrm dx
++
+\int_{D_2^-}\dot\mu_0(x)p_a(x\mid s)\,\mathrm dx.
+\end{align*}
+The two second-stage boundary terms enter with opposite signs because
+$D_{2,t}^+$ expands when $D_{2,t}^-$ contracts. They cancel because their
+combined boundary weight is $\mu_1(x)-\mu_0(x)=\delta(x)$, which is zero on
+$M_2$. Thus the continuation value $A_a(s)$ has no first-order second-stage
+boundary contribution.
+
+Since
+\[
+\kappa_t(s)=A_{1,t}(s)-A_{0,t}(s),
+\]
+we also obtain
+\begin{align*}
+\dot\kappa(s)
+&=
+\dot A_1(s)-\dot A_0(s) \\
+&=
+\int_{D_2^+}\dot\mu_1(x)\{p_1(x\mid s)-p_0(x\mid s)\}\,\mathrm dx
++
+\int_{D_2^-}\dot\mu_0(x)\{p_1(x\mid s)-p_0(x\mid s)\}\,\mathrm dx \\
+&=
+\int_{D_2^+}\dot\mu_1(x)r(x\mid s)\,\mathrm dx
++
+\int_{D_2^-}\dot\mu_0(x)r(x\mid s)\,\mathrm dx.
+\end{align*}
+This is the same expression obtained above from differentiating
+$\kappa_t(s)=\int V_{2,t}(x)r(x\mid s)\,\mathrm dx$. The display is included
+to make clear that the absence of the $M_2$ term in $\dot\kappa(s)$ is a
+cancellation result, not a notational omission.
+
+The total optimal welfare is
+\[
+V^*
+=
+\int_{D_1^+}A_1(s)m(s)\,\mathrm ds
++
+\int_{D_1^-}A_0(s)m(s)\,\mathrm ds.
+\]
+For the perturbed total welfare,
+\[
+V_t^*
+=
+\int_{D_{1,t}^+}A_{1,t}(s)m(s)\,\mathrm ds
++
+\int_{D_{1,t}^-}A_{0,t}(s)m(s)\,\mathrm ds.
+\]
+Therefore,
+\begin{align*}
+\dot V^*
+&:=
+\left.\frac{\mathrm d}{\mathrm dt}V_t^*\right|_{t=0} \\
+&=
+\int_{D_1^+}\dot A_1(s)m(s)\,\mathrm ds
++
+\int_{M_1}
+\frac{\dot\kappa(s)A_1(s)m(s)}
+{\lVert\nabla_s\kappa(s)\rVert}
+\,\mathrm d\mathcal H^{d_s-1}(s) \\
+&\quad+
+\int_{D_1^-}\dot A_0(s)m(s)\,\mathrm ds
+-
+\int_{M_1}
+\frac{\dot\kappa(s)A_0(s)m(s)}
+{\lVert\nabla_s\kappa(s)\rVert}
+\,\mathrm d\mathcal H^{d_s-1}(s) \\
+&=
+\int_{D_1^+}\dot A_1(s)m(s)\,\mathrm ds
++
+\int_{D_1^-}\dot A_0(s)m(s)\,\mathrm ds \\
+&\quad+
+\int_{M_1}
+\frac{\dot\kappa(s)\{A_1(s)-A_0(s)\}m(s)}
+{\lVert\nabla_s\kappa(s)\rVert}
+\,\mathrm d\mathcal H^{d_s-1}(s) \\
+&=
+\int_{D_1^+}\dot A_1(s)m(s)\,\mathrm ds
++
+\int_{D_1^-}\dot A_0(s)m(s)\,\mathrm ds \\
+&\quad+
+\int_{M_1}
+\frac{\dot\kappa(s)\kappa(s)m(s)}
+{\lVert\nabla_s\kappa(s)\rVert}
+\,\mathrm d\mathcal H^{d_s-1}(s) \\
+&=
+\int_{D_1^+}\dot A_1(s)m(s)\,\mathrm ds
++
+\int_{D_1^-}\dot A_0(s)m(s)\,\mathrm ds.
+\end{align*}
+The first two lines apply the moving-boundary formula to the first-stage
+treated and untreated regions. The first-stage boundary terms cancel because
+their combined weight is $A_1(s)-A_0(s)=\kappa(s)$, which is zero on $M_1$.
+Hence the total welfare has no first-order $M_1$ boundary contribution.
+
+Substituting the formulas for $\dot A_1$ and $\dot A_0$ gives
+\begin{align*}
+\dot V^*
+&=
+\int_{D_1^+}\int_{D_2^+}
+\dot\mu_1(x)p_1(x\mid s)m(s)\,\mathrm dx\,\mathrm ds
++
+\int_{D_1^+}\int_{D_2^-}
+\dot\mu_0(x)p_1(x\mid s)m(s)\,\mathrm dx\,\mathrm ds \\
+&\quad+
+\int_{D_1^-}\int_{D_2^+}
+\dot\mu_1(x)p_0(x\mid s)m(s)\,\mathrm dx\,\mathrm ds
++
+\int_{D_1^-}\int_{D_2^-}
+\dot\mu_0(x)p_0(x\mid s)m(s)\,\mathrm dx\,\mathrm ds.
+\end{align*}
+The derivative of the total welfare contains only full-dimensional Lebesgue
+integral terms. Thus, with respect to the perturbations in $\mu_0$ and
+$\mu_1$ considered here, the total welfare has an ordinary $L_2$-type
+first-order derivative, whereas the individual path components generally
+contain lower-dimensional boundary functionals.
+
+The same cancellation can be seen directly by differentiating the four path
+components and summing them. Define
+\begin{align*}
+G_{11}(s)
+&:=
+\int_{D_2^+}\mu_1(x)p_1(x\mid s)\,\mathrm dx,
+&
+G_{10}(s)
+&:=
+\int_{D_2^-}\mu_0(x)p_1(x\mid s)\,\mathrm dx, \\
+G_{01}(s)
+&:=
+\int_{D_2^+}\mu_1(x)p_0(x\mid s)\,\mathrm dx,
+&
+G_{00}(s)
+&:=
+\int_{D_2^-}\mu_0(x)p_0(x\mid s)\,\mathrm dx.
+\end{align*}
+Then
+\[
+A_1(s)=G_{11}(s)+G_{10}(s),
+\qquad
+A_0(s)=G_{01}(s)+G_{00}(s),
+\]
+and
+\begin{align*}
+V_{11}^*
+&=
+\int_{D_1^+}G_{11}(s)m(s)\,\mathrm ds,
+&
+V_{10}^*
+&=
+\int_{D_1^+}G_{10}(s)m(s)\,\mathrm ds, \\
+V_{01}^*
+&=
+\int_{D_1^-}G_{01}(s)m(s)\,\mathrm ds,
+&
+V_{00}^*
+&=
+\int_{D_1^-}G_{00}(s)m(s)\,\mathrm ds.
+\end{align*}
+The derivatives of the second-stage component functions are
+\begin{align*}
+\dot G_{11}(s)
+&=
+\int_{D_2^+}\dot\mu_1(x)p_1(x\mid s)\,\mathrm dx
++
+\int_{M_2}
+\frac{\dot\delta(x)\mu_1(x)p_1(x\mid s)}
+{\lVert\nabla_x\delta(x)\rVert}
+\,\mathrm d\mathcal H^{d_x-1}(x), \\
+\dot G_{10}(s)
+&=
+\int_{D_2^-}\dot\mu_0(x)p_1(x\mid s)\,\mathrm dx
+-
+\int_{M_2}
+\frac{\dot\delta(x)\mu_0(x)p_1(x\mid s)}
+{\lVert\nabla_x\delta(x)\rVert}
+\,\mathrm d\mathcal H^{d_x-1}(x), \\
+\dot G_{01}(s)
+&=
+\int_{D_2^+}\dot\mu_1(x)p_0(x\mid s)\,\mathrm dx
++
+\int_{M_2}
+\frac{\dot\delta(x)\mu_1(x)p_0(x\mid s)}
+{\lVert\nabla_x\delta(x)\rVert}
+\,\mathrm d\mathcal H^{d_x-1}(x), \\
+\dot G_{00}(s)
+&=
+\int_{D_2^-}\dot\mu_0(x)p_0(x\mid s)\,\mathrm dx
+-
+\int_{M_2}
+\frac{\dot\delta(x)\mu_0(x)p_0(x\mid s)}
+{\lVert\nabla_x\delta(x)\rVert}
+\,\mathrm d\mathcal H^{d_x-1}(x).
+\end{align*}
+The plus signs correspond to derivatives of treated second-stage regions
+$D_{2,t}^+$, and the minus signs correspond to derivatives of untreated
+second-stage regions $D_{2,t}^-$. These signs are purely geometric: when
+$D_{2,t}^+$ expands, $D_{2,t}^-$ contracts.
+
+Applying the first-stage moving-boundary formula gives
+\begin{align*}
+\dot V_{11}^*
+&=
+\int_{D_1^+}\dot G_{11}(s)m(s)\,\mathrm ds
++
+\int_{M_1}
+\frac{\dot\kappa(s)G_{11}(s)m(s)}
+{\lVert\nabla_s\kappa(s)\rVert}
+\,\mathrm d\mathcal H^{d_s-1}(s) \\
+&=
+\int_{D_1^+}\int_{D_2^+}
+\dot\mu_1(x)p_1(x\mid s)m(s)\,\mathrm dx\,\mathrm ds \\
+&\quad+
+\int_{D_1^+}\int_{M_2}
+\frac{\dot\delta(x)\mu_1(x)p_1(x\mid s)}
+{\lVert\nabla_x\delta(x)\rVert}
+m(s)\,\mathrm d\mathcal H^{d_x-1}(x)\,\mathrm ds \\
+&\quad+
+\int_{M_1}
+\frac{\dot\kappa(s)G_{11}(s)m(s)}
+{\lVert\nabla_s\kappa(s)\rVert}
+\,\mathrm d\mathcal H^{d_s-1}(s), \\
+\dot V_{10}^*
+&=
+\int_{D_1^+}\dot G_{10}(s)m(s)\,\mathrm ds
++
+\int_{M_1}
+\frac{\dot\kappa(s)G_{10}(s)m(s)}
+{\lVert\nabla_s\kappa(s)\rVert}
+\,\mathrm d\mathcal H^{d_s-1}(s) \\
+&=
+\int_{D_1^+}\int_{D_2^-}
+\dot\mu_0(x)p_1(x\mid s)m(s)\,\mathrm dx\,\mathrm ds \\
+&\quad-
+\int_{D_1^+}\int_{M_2}
+\frac{\dot\delta(x)\mu_0(x)p_1(x\mid s)}
+{\lVert\nabla_x\delta(x)\rVert}
+m(s)\,\mathrm d\mathcal H^{d_x-1}(x)\,\mathrm ds \\
+&\quad+
+\int_{M_1}
+\frac{\dot\kappa(s)G_{10}(s)m(s)}
+{\lVert\nabla_s\kappa(s)\rVert}
+\,\mathrm d\mathcal H^{d_s-1}(s), \\
+\dot V_{01}^*
+&=
+\int_{D_1^-}\dot G_{01}(s)m(s)\,\mathrm ds
+-
+\int_{M_1}
+\frac{\dot\kappa(s)G_{01}(s)m(s)}
+{\lVert\nabla_s\kappa(s)\rVert}
+\,\mathrm d\mathcal H^{d_s-1}(s) \\
+&=
+\int_{D_1^-}\int_{D_2^+}
+\dot\mu_1(x)p_0(x\mid s)m(s)\,\mathrm dx\,\mathrm ds \\
+&\quad+
+\int_{D_1^-}\int_{M_2}
+\frac{\dot\delta(x)\mu_1(x)p_0(x\mid s)}
+{\lVert\nabla_x\delta(x)\rVert}
+m(s)\,\mathrm d\mathcal H^{d_x-1}(x)\,\mathrm ds \\
+&\quad-
+\int_{M_1}
+\frac{\dot\kappa(s)G_{01}(s)m(s)}
+{\lVert\nabla_s\kappa(s)\rVert}
+\,\mathrm d\mathcal H^{d_s-1}(s), \\
+\dot V_{00}^*
+&=
+\int_{D_1^-}\dot G_{00}(s)m(s)\,\mathrm ds
+-
+\int_{M_1}
+\frac{\dot\kappa(s)G_{00}(s)m(s)}
+{\lVert\nabla_s\kappa(s)\rVert}
+\,\mathrm d\mathcal H^{d_s-1}(s) \\
+&=
+\int_{D_1^-}\int_{D_2^-}
+\dot\mu_0(x)p_0(x\mid s)m(s)\,\mathrm dx\,\mathrm ds \\
+&\quad-
+\int_{D_1^-}\int_{M_2}
+\frac{\dot\delta(x)\mu_0(x)p_0(x\mid s)}
+{\lVert\nabla_x\delta(x)\rVert}
+m(s)\,\mathrm d\mathcal H^{d_x-1}(x)\,\mathrm ds \\
+&\quad-
+\int_{M_1}
+\frac{\dot\kappa(s)G_{00}(s)m(s)}
+{\lVert\nabla_s\kappa(s)\rVert}
+\,\mathrm d\mathcal H^{d_s-1}(s).
+\end{align*}
+The preceding displays use the same moving-boundary calculation twice: first
+for the second-stage regions, and then for the first-stage regions. No new
+identification argument is used; these are algebraic expansions of the
+pathwise derivatives of the four identified component functionals.
+
+Let $B_{ab}^{M_2}$ denote the $M_2$ boundary term in $\dot V_{ab}^*$, and
+let $B_{ab}^{M_1}$ denote the $M_1$ boundary term. The second-stage boundary
+terms satisfy
+\begin{align*}
+&\quad
+B_{11}^{M_2}+B_{10}^{M_2}+B_{01}^{M_2}+B_{00}^{M_2} \\
+&=
+\int_{D_1^+}\int_{M_2}
+\frac{\dot\delta(x)\mu_1(x)p_1(x\mid s)}
+{\lVert\nabla_x\delta(x)\rVert}
+m(s)\,\mathrm d\mathcal H^{d_x-1}(x)\,\mathrm ds \\
+&\quad-
+\int_{D_1^+}\int_{M_2}
+\frac{\dot\delta(x)\mu_0(x)p_1(x\mid s)}
+{\lVert\nabla_x\delta(x)\rVert}
+m(s)\,\mathrm d\mathcal H^{d_x-1}(x)\,\mathrm ds \\
+&\quad+
+\int_{D_1^-}\int_{M_2}
+\frac{\dot\delta(x)\mu_1(x)p_0(x\mid s)}
+{\lVert\nabla_x\delta(x)\rVert}
+m(s)\,\mathrm d\mathcal H^{d_x-1}(x)\,\mathrm ds \\
+&\quad-
+\int_{D_1^-}\int_{M_2}
+\frac{\dot\delta(x)\mu_0(x)p_0(x\mid s)}
+{\lVert\nabla_x\delta(x)\rVert}
+m(s)\,\mathrm d\mathcal H^{d_x-1}(x)\,\mathrm ds \\
+&=
+\int_{D_1^+}\int_{M_2}
+\frac{\dot\delta(x)\{\mu_1(x)-\mu_0(x)\}p_1(x\mid s)}
+{\lVert\nabla_x\delta(x)\rVert}
+m(s)\,\mathrm d\mathcal H^{d_x-1}(x)\,\mathrm ds \\
+&\quad+
+\int_{D_1^-}\int_{M_2}
+\frac{\dot\delta(x)\{\mu_1(x)-\mu_0(x)\}p_0(x\mid s)}
+{\lVert\nabla_x\delta(x)\rVert}
+m(s)\,\mathrm d\mathcal H^{d_x-1}(x)\,\mathrm ds \\
+&=
+\int_{D_1^+}\int_{M_2}
+\frac{\dot\delta(x)\delta(x)p_1(x\mid s)}
+{\lVert\nabla_x\delta(x)\rVert}
+m(s)\,\mathrm d\mathcal H^{d_x-1}(x)\,\mathrm ds \\
+&\quad+
+\int_{D_1^-}\int_{M_2}
+\frac{\dot\delta(x)\delta(x)p_0(x\mid s)}
+{\lVert\nabla_x\delta(x)\rVert}
+m(s)\,\mathrm d\mathcal H^{d_x-1}(x)\,\mathrm ds \\
+&=0.
+\end{align*}
+The cancellation follows because $\delta(x)=0$ on $M_2$. Thus the
+second-stage boundary terms are present in the individual components but
+vanish in their sum.
+
+Similarly, the first-stage boundary terms satisfy
+\begin{align*}
+&\quad
+B_{11}^{M_1}+B_{10}^{M_1}+B_{01}^{M_1}+B_{00}^{M_1} \\
+&=
+\int_{M_1}
+\frac{\dot\kappa(s)G_{11}(s)m(s)}
+{\lVert\nabla_s\kappa(s)\rVert}
+\,\mathrm d\mathcal H^{d_s-1}(s)
++
+\int_{M_1}
+\frac{\dot\kappa(s)G_{10}(s)m(s)}
+{\lVert\nabla_s\kappa(s)\rVert}
+\,\mathrm d\mathcal H^{d_s-1}(s) \\
+&\quad-
+\int_{M_1}
+\frac{\dot\kappa(s)G_{01}(s)m(s)}
+{\lVert\nabla_s\kappa(s)\rVert}
+\,\mathrm d\mathcal H^{d_s-1}(s)
+-
+\int_{M_1}
+\frac{\dot\kappa(s)G_{00}(s)m(s)}
+{\lVert\nabla_s\kappa(s)\rVert}
+\,\mathrm d\mathcal H^{d_s-1}(s) \\
+&=
+\int_{M_1}
+\frac{\dot\kappa(s)\{G_{11}(s)+G_{10}(s)\}m(s)}
+{\lVert\nabla_s\kappa(s)\rVert}
+\,\mathrm d\mathcal H^{d_s-1}(s) \\
+&\quad-
+\int_{M_1}
+\frac{\dot\kappa(s)\{G_{01}(s)+G_{00}(s)\}m(s)}
+{\lVert\nabla_s\kappa(s)\rVert}
+\,\mathrm d\mathcal H^{d_s-1}(s) \\
+&=
+\int_{M_1}
+\frac{\dot\kappa(s)\{A_1(s)-A_0(s)\}m(s)}
+{\lVert\nabla_s\kappa(s)\rVert}
+\,\mathrm d\mathcal H^{d_s-1}(s) \\
+&=
+\int_{M_1}
+\frac{\dot\kappa(s)\kappa(s)m(s)}
+{\lVert\nabla_s\kappa(s)\rVert}
+\,\mathrm d\mathcal H^{d_s-1}(s) \\
+&=0.
+\end{align*}
+The cancellation follows because $\kappa(s)=0$ on $M_1$. This is the
+first-stage analogue of the cancellation of the $M_2$ terms.
+
+After these cancellations, the derivative of the sum of the four components is
+\begin{align*}
+\dot V^*
+&=
+\dot V_{11}^*+\dot V_{10}^*+\dot V_{01}^*+\dot V_{00}^* \\
+&=
+\int_{D_1^+}\int_{D_2^+}
+\dot\mu_1(x)p_1(x\mid s)m(s)\,\mathrm dx\,\mathrm ds
++
+\int_{D_1^+}\int_{D_2^-}
+\dot\mu_0(x)p_1(x\mid s)m(s)\,\mathrm dx\,\mathrm ds \\
+&\quad+
+\int_{D_1^-}\int_{D_2^+}
+\dot\mu_1(x)p_0(x\mid s)m(s)\,\mathrm dx\,\mathrm ds
++
+\int_{D_1^-}\int_{D_2^-}
+\dot\mu_0(x)p_0(x\mid s)m(s)\,\mathrm dx\,\mathrm ds.
+\end{align*}
+This agrees with the direct derivative of the total welfare derived above. The
+component-by-component calculation is useful because it shows exactly where
+the apparent irregularity goes: it is not absent from the component
+derivatives, but it cancels after aggregation.
+
+This calculation also clarifies the distinction between welfare and value
+functionals. For individual path components, the moving-boundary terms have
+nonzero weights such as $\mu_1(x)$, $\mu_0(x)$, or $G_{ab}(s)$ on the relevant
+margins. These are lower-dimensional Hausdorff integral functionals and are
+generally irregular in the sense of \cite{chenGao2026thin}. For the total
+welfare, the second-stage boundary weight reduces to
+$\mu_1(x)-\mu_0(x)=\delta(x)$ on $M_2$, and the first-stage boundary weight
+reduces to $A_1(s)-A_0(s)=\kappa(s)$ on $M_1$. Both weights vanish on their
+respective margins. This is the dynamic analogue of the distinction between
+regular welfare functionals and irregular value functionals emphasized in the
+optimal treatment assignment literature.
+
+The preceding derivative calculations are valid only under thin, regular
+margins. In particular, $M_2=\{x:\delta(x)=0\}$ must have zero
+$d_x$-dimensional Lebesgue measure and must satisfy
+$\lVert\nabla_x\delta(x)\rVert\neq 0$ on the margin. Similarly,
+$M_1=\{s:\kappa(s)=0\}$ must have zero $d_s$-dimensional Lebesgue measure and
+must satisfy $\lVert\nabla_s\kappa(s)\rVert\neq 0$ on the margin. Smoothness of
+$M_1$ should be imposed through smoothness and regularity of
+$s\mapsto\kappa(s)$; it is not automatic merely because $V_2$ is integrated
+over $X$. Sufficient smoothness of $p_a(x\mid s)$, $\mu_a(x)$, and the support
+conditions are needed for this step.
+
+If the regular-margin conditions fail, the moving-boundary expressions with
+denominators $\lVert\nabla_x\delta(x)\rVert$ and
+$\lVert\nabla_s\kappa(s)\rVert$ need not be valid. For example, the expansion
+can fail if $\{\delta(x)=0\}$ has positive $d_x$-dimensional Lebesgue measure,
+if $\nabla_x\delta(x)=0$ on the second-stage margin, if
+$\{\kappa(s)=0\}$ has positive $d_s$-dimensional Lebesgue measure, or if
+$\nabla_s\kappa(s)=0$ on the first-stage margin. In such cases, the relevant
+path components may be only directionally differentiable, or may fail to have
+a linear pathwise derivative. Even when the derivative exists, a component
+derivative containing Hausdorff integrals over $M_1$ or $M_2$ is generally not
+an ordinary $L_2$-regular derivative, because it depends on the perturbation
+through lower-dimensional sets. This is the thin-set irregularity emphasized by
+\cite{chenGao2026thin}. By contrast, the total welfare derivative above has no
+such lower-dimensional term after the cancellations, which explains why the
+total welfare can be regular even though its individual treatment-path
+components are not.
+\section{Literature Review}
+My paper is conceptually similar to Viviano and Bradic, where they study a two step approach, finding pareto prontier and then minimize unfairness. They proceed in a lexicographic manner. \cite{viviano2024fair}
+
+
+\section{Model Setup and Directional Derivatives}
+\subsection{Social Planner's Problem}
+
+\begin{align*}
+\min_{\pi(\cdot)} \quad &\mathbb{E}\left[Y(1)\pi(X) + Y(0)(1-\pi(X))\right]\\
+\textrm{s.t.} \quad & \mathbb{E}[Z(1)\pi(X) + Z(0)(1-\pi(X))]\geq 0\\
+\end{align*}
+
+This is equivalent to
+
+\begin{align*}
+\min_{\pi(\cdot)} \quad &\mathbb{E}\left[Y(1)\pi(X) + Y(0)(1-\pi(X)) - \lambda(Z(1)\pi(X) + Z(0)(1-\pi(X)))\right]\\
+& \mathbb{E}[(Y(1) - \lambda Z(1))\pi(X) + (Y(0) - \lambda Z(0))(1-\pi(X))]
+\end{align*}
+
+so the optimal rule is
+
+\[
+\mathbbm{1}\{\mathbb{E}[Y(1) - Y(0) - \lambda(Z(1) - Z(0)) \mid X] \geq 0\}
+\]
+
+what is $\lambda$? it quantifies trade off
+
+If $\lambda$ is 0, then 
+
+
+\subsection{Social Planner's Problem}
+Consider a social planner's idealized problem with a two-item checklist: 
+In the first stage
+\[
+\min_{p(\cdot)}\mathbb{E}\left[Z_i(1)p(X) + Z_i(0)(1-p(X))\right]
+\]
+which induces a hard-threshold constraint $\mathbbm{1}\{g_0(x) \geq 0\}$
+
+In the second stage
+\[
+\mathbb{E}[Y_i(1)\mathbbm{1}\{h_0(X) \geq 0, g_0(X) \geq 0\}]
+\]
+
+
+
+\section{Estimation and Inference of the Value Functional}
+
+
+\newpage
+\bibliographystyle{ecca}
+\bibliography{JMP}
+
+\newpage
+\begin{appendix}
+\section{Proofs}
+
+\subsection{Proof of Proposition \ref{characterize_optimal_regime}}
+\[
+\max_\pi \mathbb{E}\left[Y^{(\pi)}\right] = \max_\pi \mathbb{E}\left[\mathbb{E}\left[Y^{(\pi)} \; \mid \; S\right]\right] = \max_{\pi_2} \mathbb{E} \left[ \max_{\tau_1}\mathbb{E}\left[Y^{(\tau_1, \pi_2)} \mid S\right]\right]
+\]
+where the second equation follows because the first period $\tau_1$ is not allowed to depend on the second period policy $\pi_2$. Thus the optimal first-period policy is defined as
+\[
+\pi^*_1(S) = \argmax_{\tau_1} \; \mathbb{E}\left[Y^{(\tau_1, \pi^*_2)} \mid S\right]
+\]
+
+Moreover, we can further write
+\begin{align*}
+    \max_{\pi_2} \mathbb{E}\left[\max_{\tau_1} \mathbb{E}\left[Y^{(\tau_1, \pi_2)} \mid S\right]\right] &=  \max_{\pi_2} \mathbb{E}\left[\max_{\tau_1} \mathbb{E}\left[Y^{(\tau_1, \pi_2)} \mid T_1 = \tau_1, S\right]\right]\\
+    &= \max_{\pi_2} \mathbb{E}\left[\max_{\tau_1} \mathbb{E}\left[Y^{(T_1, \pi_2)} \mid T_1 = \tau_1, S\right]\right]\\
+    &= \max_{\pi_2} \mathbb{E}\left[\max_{\tau_1} \mathbb{E}\left[ \mathbb{E}\left[Y^{(T_1, \pi_2)} \mid X, T_1 = \tau_1, S\right] \mid T_1 = \tau_1, S\right]\right]\\
+    &= \max_{\pi_2} \mathbb{E}\left[\max_{\tau_1} \mathbb{E}\left[ \mathbb{E}\left[Y^{(T_1, \pi_2)} \mid X\right] \mid T_1 = \tau_1, S\right]\right]\\
+    &= \mathbb{E}\left[\max_{\tau_1} \mathbb{E}\left[ \max_{\tau_2}\mathbb{E}\left[Y^{(T_1, \tau_2)} \mid X\right] \mid T_1 = \tau_1, S\right]\right]
+\end{align*}
+
+Thus, the optimal second period policy is defined as 
+\[
+\pi^*_2(X) = \argmax_{\tau_2} \; \mathbb{E}\left[Y^{(T_1, \tau_2)} \mid X\right]
+\]
+
+This implies
+\begin{align*}
+\mathbbm{1}\{\pi^*_2(X)=1\}
+&=
+\mathbbm{1}\left\{
+\mathbb{E}\left[Y^{(T_1,1)} \mid X\right]
+-
+\mathbb{E}\left[Y^{(T_1,0)} \mid X\right]
+\geq 0
+\right\} \\[0.5em]
+&=
+\mathbbm{1}\left\{
+\mathbb{E}\left[Y^{(T_1,1)} \mid X,T_2=1\right]
+-
+\mathbb{E}\left[Y^{(T_1,0)} \mid X,T_2=0\right]
+\geq 0
+\right\} \\[0.5em]
+&=
+\mathbbm{1}\left\{
+\mathbb{E}\left[Y \mid X,T_2=1\right]
+-
+\mathbb{E}\left[Y \mid X,T_2=0\right]
+\geq 0
+\right\}\\
+&= 
+\mathbbm{1}\left\{
+\mu_1(X) - \mu_0(X)
+\right\}
+\end{align*}
+
+and
+\begin{align*}
+\mathbbm{1}\{\pi^*_1(S)=1\}
+&=
+\mathbbm{1}\left\{
+\mathbb{E}\left[ Y^{(1,\pi_2^*)} \mid S \right]
+-
+\mathbb{E}\left[ Y^{(0,\pi_2^*)} \mid S \right]
+\geq 0
+\right\} \\[0.5em]
+&=
+\mathbbm{1}\left\{
+\mathbb{E}\left[ Y^{(1,\pi_2^*)} \mid S,T_1=1 \right]
+-
+\mathbb{E}\left[ Y^{(0,\pi_2^*)} \mid S,T_1=0 \right]
+\geq 0
+\right\} \\[0.5em]
+&=
+\mathbbm{1}\left\{
+\mathbb{E}\left[
+\mathbb{E}\left[ Y^{(1,\pi_2^*)} \mid S,T_1=1,X \right]
+\mid S,T_1=1
+\right]
+-
+\mathbb{E}\left[
+\mathbb{E}\left[ Y^{(0,\pi_2^*)} \mid S,T_1=0,X \right]
+\mid S,T_1=0
+\right]
+\geq 0
+\right\} \\[0.5em]
+&=
+\mathbbm{1}\left\{
+\mathbb{E}\left[
+\mathbb{E}\left[ Y^{(T_1,\pi_2^*)} \mid S,T_1=1,X \right]
+\mid S,T_1=1
+\right]
+-
+\mathbb{E}\left[
+\mathbb{E}\left[ Y^{(T_1,\pi_2^*)} \mid S,T_1=0,X \right]
+\mid S,T_1=0
+\right]
+\geq 0
+\right\} \\[0.5em]
+&=
+\mathbbm{1}\left\{
+\mathbb{E}\left[
+\mathbb{E}\left[ Y^{(T_1,\pi_2^*)} \mid X \right]
+\mid S,T_1=1
+\right]
+-
+\mathbb{E}\left[
+\mathbb{E}\left[ Y^{(T_1,\pi_2^*)} \mid X \right]
+\mid S,T_1=0
+\right]
+\geq 0
+\right\} \\[0.5em]
+&=
+\mathbbm{1}\left\{
+\mathbb{E}\left[
+\max_{\tau_2}
+\mathbb{E}\left[ Y^{(T_1,\tau_2)} \mid X \right]
+\mid S,T_1=1
+\right]
+-
+\mathbb{E}\left[
+\max_{\tau_2}
+\mathbb{E}\left[ Y^{(T_1,\tau_2)} \mid X \right]
+\mid S,T_1=0
+\right]
+\geq 0
+\right\}\\
+&= 
+\mathbbm{1}\left\{
+\mathbb{E}[V_2(X) \mid S, T_1 = 1] - \mathbb{E}[V_2(X) \mid S, T_1 = 0] \geq 0
+\right\}
+\end{align*}
+
+    
+\end{appendix}
+\end{document}

@@ -1,0 +1,10 @@
+# Third-party paper library — not ours to redistribute
+/Literature/
+
+# Personal working notes
+/JMP Notes/
+/Discussion with GPT/
+
+# Python bytecode
+__pycache__/
+*.py[cod]

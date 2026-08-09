@@ -1,0 +1,4 @@
+method,estimate,lo,hi,se,note
+"sieve-Riesz (K=8, conditional)",0.8973090254119984,0.8748092875536145,0.9198087632703823,0.011479669032624573,"sieve-Riesz variance CONDITIONAL on estimated densities (m, p_a)"
+participant bootstrap (full-refit),0.8862959363766534,0.8089964381513733,0.9735362196024824,0.04273934050591127,percentile CI; not guaranteed valid for the hard-threshold target -- see MC study
+multiplier bootstrap,0.8973090254119984,0.8748911551347971,0.9199330551605457,0.011778789739316503,"conditional on estimated densities m, p_a"

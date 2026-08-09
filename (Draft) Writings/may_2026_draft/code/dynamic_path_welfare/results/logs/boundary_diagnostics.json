@@ -1,0 +1,42 @@
+{
+  "delta": {
+    "roots": [
+      {
+        "location": -0.06676170941453828,
+        "quantile": 0.467,
+        "derivative": 0.5789802894160501,
+        "distance_to_support_edge": 0.47383440033748586,
+        "local_n": 159,
+        "regular": true,
+        "flags": []
+      }
+    ],
+    "has_crossing": true,
+    "n_sign_changes": 1,
+    "band_counts": {
+      "0.05792137601553864": 110,
+      "0.11584275203107729": 207,
+      "0.23168550406215457": 436
+    }
+  },
+  "kappa": {
+    "roots": [
+      {
+        "location": 0.07477040054120423,
+        "quantile": 0.5215,
+        "derivative": 0.291609754385628,
+        "distance_to_support_edge": 0.43286129304268145,
+        "local_n": 140,
+        "regular": true,
+        "flags": []
+      }
+    ],
+    "has_crossing": true,
+    "n_sign_changes": 1,
+    "band_counts": {
+      "0.05792137601553864": 243,
+      "0.11584275203107729": 523,
+      "0.23168550406215457": 1193
+    }
+  }
+}

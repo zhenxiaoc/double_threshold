@@ -1,0 +1,31 @@
+# PRIMARY RUNNABLE CONFIG (simulated data).
+# Because no accessible real dataset passes the hard gates (see docs/data_access_blockers.md),
+# the full estimator + inference pipeline is exercised on a calibrated simulation with KNOWN
+# truth.  This is a software + methods demonstration, NOT a completed main empirical application.
+name: sim_primary
+dataset: simulation
+sim_dgp: dgp1          # regular double-boundary DGP
+sim_n: 2000
+outcome_units: "simulated outcome units"
+seed: 20260713
+treatment_probs:
+  e1: 0.5
+  e2: 0.5
+spline:
+  candidate_dims: [4, 5, 6, 8, 10, 12]
+  ridge: 0.0
+  inner_cv_folds: 5
+crossfit:
+  n_outer_folds: 5
+  n_inner_folds: 5
+  seed: 20260713
+inference:
+  sieve_dims: [5, 6, 8, 10]
+  primary_dim: 8
+  fd_step_sizes: [0.01, 0.001, 0.0001]
+bootstrap:
+  n_boot_dev: 99
+  n_boot_final: 499
+  seed: 909090
+cost:
+  grid_sd_units: [0.0, 0.025, 0.05, 0.10]

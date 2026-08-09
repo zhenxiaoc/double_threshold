@@ -1,0 +1,91 @@
+krr truth: 0.1610
+wgan2d truth (degenerate boundary case): 0.0000
+affine truth: 0.2087
+[krr]
+    n=1000: 330s
+              cf_gbr bias=+0.0666 sd=0.0316 rmse=0.0737 se_ratio=1.41 cov=0.680
+        cf_riesz_gbr bias=+0.0562 sd=0.0545 rmse=0.0783 se_ratio=0.82 cov=0.704
+              dd_gbr bias=+0.0488 sd=0.0653 rmse=0.0815 se_ratio=0.68 cov=0.706
+              plugin bias=+0.0103 sd=0.0362 rmse=0.0376 se_ratio=1.11 cov=0.962
+                  ss bias=+0.0030 sd=0.0446 rmse=0.0447 se_ratio=0.90 cov=0.894
+          ss_margins bias=-0.0058 sd=0.0456 rmse=0.0459 se_ratio=0.88 cov=0.882
+    n=2000: 360s
+              cf_gbr bias=+0.0444 sd=0.0238 rmse=0.0504 se_ratio=1.06 cov=0.578
+        cf_riesz_gbr bias=+0.0260 sd=0.0268 rmse=0.0373 se_ratio=0.94 cov=0.784
+              dd_gbr bias=+0.0061 sd=0.0361 rmse=0.0366 se_ratio=0.70 cov=0.830
+              plugin bias=+0.0052 sd=0.0259 rmse=0.0264 se_ratio=1.06 cov=0.958
+                  ss bias=-0.0005 sd=0.0293 rmse=0.0293 se_ratio=0.94 cov=0.932
+          ss_margins bias=-0.0050 sd=0.0294 rmse=0.0298 se_ratio=0.94 cov=0.918
+    n=4000: 403s
+              cf_gbr bias=+0.0239 sd=0.0189 rmse=0.0304 se_ratio=0.87 cov=0.666
+        cf_riesz_gbr bias=+0.0145 sd=0.0196 rmse=0.0244 se_ratio=0.83 cov=0.808
+              dd_gbr bias=-0.0046 sd=0.0273 rmse=0.0277 se_ratio=0.60 cov=0.752
+              plugin bias=+0.0037 sd=0.0185 rmse=0.0188 se_ratio=1.00 cov=0.954
+                  ss bias=+0.0004 sd=0.0204 rmse=0.0204 se_ratio=0.91 cov=0.934
+          ss_margins bias=-0.0021 sd=0.0204 rmse=0.0205 se_ratio=0.91 cov=0.932
+    n=8000: 451s
+              cf_gbr bias=+0.0088 sd=0.0142 rmse=0.0167 se_ratio=0.82 cov=0.820
+        cf_riesz_gbr bias=+0.0045 sd=0.0141 rmse=0.0148 se_ratio=0.83 cov=0.882
+              dd_gbr bias=-0.0109 sd=0.0195 rmse=0.0223 se_ratio=0.60 cov=0.690
+              plugin bias=+0.0031 sd=0.0133 rmse=0.0136 se_ratio=0.94 cov=0.948
+                  ss bias=+0.0007 sd=0.0134 rmse=0.0134 se_ratio=0.93 cov=0.930
+          ss_margins bias=-0.0005 sd=0.0135 rmse=0.0135 se_ratio=0.93 cov=0.926
+[wgan2d]
+    n=1000: 319s
+              cf_gbr bias=+0.1742 sd=0.0357 rmse=0.1778 se_ratio=1.94 cov=0.126
+        cf_riesz_gbr bias=+0.1732 sd=0.1099 rmse=0.2051 se_ratio=0.63 cov=0.146
+              dd_gbr bias=+0.1184 sd=0.1203 rmse=0.1687 se_ratio=0.57 cov=0.422
+              plugin bias=+0.0604 sd=0.0432 rmse=0.0742 se_ratio=1.60 cov=0.922
+                  ss bias=+0.0314 sd=0.0643 rmse=0.0715 se_ratio=1.07 cov=0.888
+          ss_margins bias=+0.0140 sd=0.0669 rmse=0.0683 se_ratio=1.03 cov=0.866
+    n=2000: 364s
+              cf_gbr bias=+0.1608 sd=0.0300 rmse=0.1636 se_ratio=1.17 cov=0.008
+        cf_riesz_gbr bias=+0.1598 sd=0.0361 rmse=0.1638 se_ratio=0.97 cov=0.026
+              dd_gbr bias=+0.0858 sd=0.0523 rmse=0.1005 se_ratio=0.67 cov=0.376
+              plugin bias=+0.0329 sd=0.0243 rmse=0.0409 se_ratio=1.52 cov=0.940
+                  ss bias=+0.0101 sd=0.0347 rmse=0.0361 se_ratio=1.06 cov=0.906
+          ss_margins bias=+0.0019 sd=0.0362 rmse=0.0362 se_ratio=1.02 cov=0.894
+    n=4000: 411s
+              cf_gbr bias=+0.1341 sd=0.0231 rmse=0.1360 se_ratio=1.02 cov=0.000
+        cf_riesz_gbr bias=+0.1342 sd=0.0241 rmse=0.1363 se_ratio=0.98 cov=0.000
+              dd_gbr bias=+0.0461 sd=0.0353 rmse=0.0580 se_ratio=0.67 cov=0.508
+              plugin bias=+0.0173 sd=0.0113 rmse=0.0207 se_ratio=1.73 cov=0.936
+                  ss bias=+0.0050 sd=0.0183 rmse=0.0190 se_ratio=1.06 cov=0.898
+          ss_margins bias=+0.0011 sd=0.0188 rmse=0.0188 se_ratio=1.04 cov=0.886
+    n=8000: 456s
+              cf_gbr bias=+0.0962 sd=0.0175 rmse=0.0977 se_ratio=0.92 cov=0.000
+        cf_riesz_gbr bias=+0.0966 sd=0.0176 rmse=0.0982 se_ratio=0.91 cov=0.000
+              dd_gbr bias=+0.0071 sd=0.0200 rmse=0.0212 se_ratio=0.80 cov=0.866
+              plugin bias=+0.0085 sd=0.0061 rmse=0.0105 se_ratio=1.73 cov=0.930
+                  ss bias=+0.0018 sd=0.0091 rmse=0.0093 se_ratio=1.16 cov=0.898
+          ss_margins bias=-0.0002 sd=0.0092 rmse=0.0092 se_ratio=1.15 cov=0.874
+[affine]
+    n=1000: 302s
+              cf_gbr bias=+0.0277 sd=0.0378 rmse=0.0468 se_ratio=1.00 cov=0.862
+        cf_riesz_gbr bias=+0.0255 sd=0.0416 rmse=0.0487 se_ratio=0.91 cov=0.870
+              dd_gbr bias=+0.0032 sd=0.0604 rmse=0.0604 se_ratio=0.63 cov=0.764
+              plugin bias=+0.0042 sd=0.0546 rmse=0.0547 se_ratio=0.97 cov=0.916
+                  ss bias=+0.0025 sd=0.0681 rmse=0.0680 se_ratio=0.78 cov=0.860
+          ss_margins bias=+0.0023 sd=0.0680 rmse=0.0680 se_ratio=0.78 cov=0.858
+    n=2000: 333s
+              cf_gbr bias=+0.0161 sd=0.0284 rmse=0.0326 se_ratio=0.94 cov=0.878
+        cf_riesz_gbr bias=+0.0140 sd=0.0291 rmse=0.0322 se_ratio=0.92 cov=0.896
+              dd_gbr bias=-0.0024 sd=0.0441 rmse=0.0441 se_ratio=0.60 cov=0.778
+              plugin bias=+0.0017 sd=0.0339 rmse=0.0339 se_ratio=1.07 cov=0.958
+                  ss bias=+0.0005 sd=0.0393 rmse=0.0393 se_ratio=0.92 cov=0.928
+          ss_margins bias=+0.0007 sd=0.0392 rmse=0.0391 se_ratio=0.93 cov=0.934
+    n=4000: 396s
+              cf_gbr bias=+0.0097 sd=0.0238 rmse=0.0257 se_ratio=0.85 cov=0.886
+        cf_riesz_gbr bias=+0.0077 sd=0.0241 rmse=0.0253 se_ratio=0.84 cov=0.876
+              dd_gbr bias=-0.0014 sd=0.0325 rmse=0.0325 se_ratio=0.62 cov=0.780
+              plugin bias=+0.0012 sd=0.0249 rmse=0.0249 se_ratio=1.00 cov=0.940
+                  ss bias=+0.0003 sd=0.0268 rmse=0.0268 se_ratio=0.93 cov=0.932
+          ss_margins bias=+0.0003 sd=0.0267 rmse=0.0267 se_ratio=0.93 cov=0.934
+    n=8000: 420s
+              cf_gbr bias=+0.0036 sd=0.0174 rmse=0.0178 se_ratio=0.86 cov=0.900
+        cf_riesz_gbr bias=+0.0022 sd=0.0182 rmse=0.0184 se_ratio=0.83 cov=0.886
+              dd_gbr bias=-0.0036 sd=0.0241 rmse=0.0243 se_ratio=0.63 cov=0.778
+              plugin bias=-0.0013 sd=0.0171 rmse=0.0172 se_ratio=1.00 cov=0.954
+                  ss bias=-0.0022 sd=0.0178 rmse=0.0179 se_ratio=0.96 cov=0.932
+          ss_margins bias=-0.0022 sd=0.0178 rmse=0.0179 se_ratio=0.96 cov=0.930
+done -> C:\Users\陈震霄\Dropbox\Zhenxiao\JMP\code\surrogate_harm_share\results\tables\debias_study.csv

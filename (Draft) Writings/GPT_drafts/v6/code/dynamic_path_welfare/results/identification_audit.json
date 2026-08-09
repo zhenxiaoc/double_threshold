@@ -1,0 +1,127 @@
+{
+  "continuous_state": {
+    "S": {
+      "n_unique": 2000,
+      "max_point_mass": 0.0005,
+      "quantiles": {
+        "q01": -2.728154822944553,
+        "q05": -1.8997294819433006,
+        "q25": -0.7601696644936418,
+        "q50": -0.010268515329661332,
+        "q75": 0.8953399316309412,
+        "q95": 1.9657786480478832,
+        "q99": 2.663801966950266
+      },
+      "effectively_continuous": true,
+      "genuinely_continuous": true,
+      "note": "",
+      "support_by_T1": {
+        "T1=0": {
+          "n": 1019,
+          "min": -4.272350204373446,
+          "max": 3.3926540557604046
+        },
+        "T1=1": {
+          "n": 981,
+          "min": -3.313742435102154,
+          "max": 3.0520614678563573
+        }
+      }
+    },
+    "X": {
+      "n_unique": 2000,
+      "max_point_mass": 0.0005,
+      "quantiles": {
+        "q01": -3.8231201991520325,
+        "q05": -2.5244684253021576,
+        "q25": -1.0094805270147738,
+        "q50": 0.042436473441608766,
+        "q75": 1.1559671738682546,
+        "q95": 2.5699368854781945,
+        "q99": 3.6851321012053826
+      },
+      "effectively_continuous": true,
+      "genuinely_continuous": true,
+      "note": "",
+      "support_by_T1": {
+        "T1=0": {
+          "n": 1019,
+          "min": -4.869220329714843,
+          "max": 4.475921831123175
+        },
+        "T1=1": {
+          "n": 981,
+          "min": -4.89055346478981,
+          "max": 5.289779056317887
+        }
+      }
+    }
+  },
+  "positivity": {
+    "path_counts": {
+      "00": 503,
+      "01": 516,
+      "10": 527,
+      "11": 454
+    },
+    "P(T1=1)_empirical": 0.4905,
+    "P(T2=1)_empirical": 0.485,
+    "P(T1=1)_design": 0.5,
+    "P(T2=1)_design": 0.5,
+    "n_entering_stage2": 2000,
+    "path_effective_sizes": {
+      "00": 503,
+      "01": 516,
+      "10": 527,
+      "11": 454
+    },
+    "smallest_assignment_prob": 0.485,
+    "positivity_holds_at_0.10": true,
+    "n_missing_T1": 0,
+    "n_missing_T2": 0
+  },
+  "markov_sufficiency": {
+    "mse_restricted_YXT2": 0.2580098746284222,
+    "mse_rich_YSXT1T2": 0.2682029670192357,
+    "r2_restricted": 0.8077357248163967,
+    "r2_rich": 0.8001400173915485,
+    "incremental_mse_reduction": -0.03950659797611732,
+    "markov_questionable": false,
+    "interpretation": "rich history does not materially improve held-out fit at the 5% threshold (consistent with -- but does not prove -- Markov sufficiency)"
+  },
+  "balance": {
+    "T1_from_S_auc": 0.5092058233022121,
+    "T2_from_history_auc": 0.5205524972475227,
+    "note": "AUC near 0.5 is consistent with randomization; AUC>>0.5 flags a randomization or coding problem. Balance is a diagnostic, not proof of ignorability."
+  },
+  "attrition": {
+    "n": 2000,
+    "missing_S": 0.0,
+    "missing_X": 0.0,
+    "missing_Y": 0.0,
+    "missing_Y_by_path": {
+      "00": {
+        "n": 503,
+        "missing_Y": 0.0
+      },
+      "01": {
+        "n": 516,
+        "missing_Y": 0.0
+      },
+      "10": {
+        "n": 527,
+        "missing_Y": 0.0
+      },
+      "11": {
+        "n": 454,
+        "missing_Y": 0.0
+      }
+    },
+    "missing_Y_by_S_quartile": {
+      "0": 0.0,
+      "1": 0.0,
+      "2": 0.0,
+      "3": 0.0
+    }
+  }
+}

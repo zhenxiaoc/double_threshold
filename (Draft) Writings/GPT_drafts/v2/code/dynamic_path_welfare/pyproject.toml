@@ -1,0 +1,41 @@
+[build-system]
+requires = ["setuptools>=68", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "path_welfare"
+version = "0.1.0"
+description = "Plug-in estimation and irregular inference for path-specific welfare components of an estimated optimal two-stage dynamic treatment regime (V_11^*)."
+readme = "README.md"
+requires-python = ">=3.11"
+authors = [{ name = "Zhenxiao Chen JMP replication engine" }]
+dependencies = [
+    "numpy>=1.26",
+    "pandas>=2.1",
+    "scipy>=1.11",
+    "scikit-learn>=1.3",
+    "statsmodels>=0.14",
+    "matplotlib>=3.8",
+    "joblib>=1.3",
+    "pydantic>=2.5",
+    "pyyaml>=6.0",
+]
+
+[project.optional-dependencies]
+dev = ["pytest>=7.4", "ruff>=0.1", "mypy>=1.7"]
+io = ["pyreadr>=0.5"]
+
+[project.scripts]
+path-welfare = "path_welfare.cli:main"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.ruff]
+line-length = 100
+target-version = "py311"
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+addopts = "-q"
+pythonpath = ["src"]

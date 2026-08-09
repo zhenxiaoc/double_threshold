@@ -1,0 +1,4 @@
+# Config for the dataset discovery + access-audit stage.
+name: dataset_search
+dataset: simulation   # search-data does not load microdata; scans local dirs + writes catalogue
+seed: 20260713

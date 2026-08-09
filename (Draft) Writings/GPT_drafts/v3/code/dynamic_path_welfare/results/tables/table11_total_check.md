@@ -1,0 +1,8 @@
+### table11_total_check
+
+| quantity               |   value |
+|:-----------------------|--------:|
+| sum of components      | 1.02541 |
+| direct total (E[A*])   | 1.02541 |
+| component-sum residual | 0       |
+| true total             | 1.03107 |

@@ -1,0 +1,40 @@
+{
+  "latex-workshop.linting.chktex.exec.path": "C:/Users/陈震霄/AppData/Local/Programs/MiKTeX/miktex/bin/x64/chktex.exe",
+  "latex-workshop.latex.recipes": [
+    {
+      "name": "pdflatex",
+      "tools": [
+        "pdflatex"
+      ]
+    }
+  ],
+  "latex-workshop.latex.recipe.default": "first",
+  "latex-workshop.latex.autoBuild.run": "onSave",
+  "latex-workshop.view.pdf.viewer": "tab",
+  "latex-workshop.latex.tools": [
+    {
+      "name": "pdflatex",
+      "command": "C:/Users/陈震霄/AppData/Local/Programs/MiKTeX/miktex/bin/x64/pdflatex.exe",
+      "args": [
+        "-synctex=1",
+        "-interaction=nonstopmode",
+        "-file-line-error",
+        "%DOC%"
+      ]
+    }
+  ],
+  "[latex]": {
+    "editor.quickSuggestions": {
+      "other": false,
+      "comments": false,
+      "strings": false
+    },
+    "editor.suggestOnTriggerCharacters": false,
+    "editor.wordBasedSuggestions": "off",
+    "editor.inlineSuggest.enabled": false,
+    "editor.snippetSuggestions": "none"
+  },
+  "latex-workshop.intellisense.triggers.latex": [],
+  "latex-workshop.intellisense.atSuggestion.trigger.latex": "",
+  "latex-workshop.intellisense.package.enabled": false
+}

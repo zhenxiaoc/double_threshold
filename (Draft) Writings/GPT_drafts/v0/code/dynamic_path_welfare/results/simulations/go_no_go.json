@@ -1,0 +1,15 @@
+{
+  "coverage95": 0.983,
+  "coverage95>=0.90": true,
+  "fail_rate<0.05": true,
+  "median_len_sd<=1.0": true,
+  "se_ratio_within_20pct": true,
+  "roots_stable": true,
+  "support_ok": true,
+  "USABLE": true,
+  "INFORMATIVE": true,
+  "verdict": "informative",
+  "interval_method": "participant full-refit bootstrap",
+  "conditional_sieve_cov95": 0.5,
+  "conditional_sieve_verdict": "NOT usable (SE conditional on densities under-covers)"
+}

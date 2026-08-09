@@ -1,0 +1,210 @@
+{
+  "truth": {
+    "theta_harm": 0.12636,
+    "theta_pp": 0.87362,
+    "theta_mp": 0.0,
+    "theta_mm": 2e-05,
+    "rho": 0.126362527250545,
+    "treat_share_S": 0.99998,
+    "ate_S": 8.587132664712835,
+    "ate_Y": 6.68446901339506,
+    "W_Y": 6.947861269293497,
+    "n_draw": 100000,
+    "tau_M": 300
+  },
+  "covariates": [
+    "ctotal_pcmonth_bsl",
+    "cnonfood_pcmonth_bsl",
+    "cfood_pcmonth_bsl",
+    "cdurable_pcmonth_bsl",
+    "index_foodsecurity_bsl",
+    "fs_enoughfood_bsl",
+    "fs_adultskip_bsl",
+    "fs_wholeday_bsl",
+    "fs_childskip_bsl",
+    "fs_twomeals_bsl",
+    "asset_index_bsl",
+    "asset_prod_index_bsl",
+    "asset_hh_index_bsl",
+    "loan_totalamt_bsl",
+    "loan_informalamt_bsl",
+    "loan_formalamt_bsl",
+    "sav_depositamt_bsl",
+    "iagri_month_bsl",
+    "ranimals_month_bsl",
+    "percep_econ_bsl"
+  ],
+  "fidelity": {
+    "ctotal_pcmonth_bsl": {
+      "mean_real": 134.46827312152337,
+      "mean_gen": 116.77307723094266,
+      "sd_real": 148.10807747523944,
+      "sd_gen": 76.02585386686218
+    },
+    "cnonfood_pcmonth_bsl": {
+      "mean_real": 50.75848761389351,
+      "mean_gen": 43.87795903881531,
+      "sd_real": 56.990996835509364,
+      "sd_gen": 31.96064108196688
+    },
+    "cfood_pcmonth_bsl": {
+      "mean_real": 79.72724030336117,
+      "mean_gen": 62.15591093737318,
+      "sd_real": 125.02428077713807,
+      "sd_gen": 41.41779472931172
+    },
+    "cdurable_pcmonth_bsl": {
+      "mean_real": 3.982545331924016,
+      "mean_gen": 12.967839990169601,
+      "sd_real": 20.659181936717964,
+      "sd_gen": 59.62049574599182
+    },
+    "index_foodsecurity_bsl": {
+      "mean_real": -0.07604423415716889,
+      "mean_gen": -0.10541586328769956,
+      "sd_real": 0.9853221623107824,
+      "sd_gen": 1.166606985982842
+    },
+    "fs_enoughfood_bsl": {
+      "mean_real": 0.3114754098360656,
+      "mean_gen": 0.29983,
+      "sd_real": 0.4630966194041131,
+      "sd_gen": 0.45818333786798837
+    },
+    "fs_adultskip_bsl": {
+      "mean_real": 0.29508196721311475,
+      "mean_gen": 0.30296,
+      "sd_real": 0.45607959813913135,
+      "sd_gen": 0.45953807067533253
+    },
+    "fs_wholeday_bsl": {
+      "mean_real": 0.32669789227166274,
+      "mean_gen": 0.32644,
+      "sd_real": 0.4690057349936303,
+      "sd_gen": 0.46891036073001474
+    },
+    "fs_childskip_bsl": {
+      "mean_real": 0.544496487119438,
+      "mean_gen": 0.55642,
+      "sd_real": 0.4980161268814798,
+      "sd_gen": 0.4968065857051633
+    },
+    "fs_twomeals_bsl": {
+      "mean_real": 0.7365339578454333,
+      "mean_gen": 0.75844,
+      "sd_real": 0.4405129814046072,
+      "sd_gen": 0.42802893173255485
+    },
+    "asset_index_bsl": {
+      "mean_real": 0.06208008191984777,
+      "mean_gen": 0.32794444499816766,
+      "sd_real": 1.7185535430621435,
+      "sd_gen": 2.294265079432953
+    },
+    "asset_prod_index_bsl": {
+      "mean_real": 0.06197873361526489,
+      "mean_gen": 1.2044996038718276,
+      "sd_real": 1.8619763028986955,
+      "sd_gen": 7.083362785628056
+    },
+    "asset_hh_index_bsl": {
+      "mean_real": 0.007138568095522616,
+      "mean_gen": -0.015766894039854675,
+      "sd_real": 0.9415137404261399,
+      "sd_gen": 0.8199182382790686
+    },
+    "loan_totalamt_bsl": {
+      "mean_real": 1035.7393373078569,
+      "mean_gen": 1117.9769424665915,
+      "sd_real": 3688.116718828164,
+      "sd_gen": 4416.307876294334
+    },
+    "loan_informalamt_bsl": {
+      "mean_real": 915.6574187972158,
+      "mean_gen": 923.095821670018,
+      "sd_real": 3634.3508233453513,
+      "sd_gen": 3947.719236807204
+    },
+    "loan_formalamt_bsl": {
+      "mean_real": 6.995529031865211,
+      "mean_gen": 5.243028256226018,
+      "sd_real": 106.0243232241449,
+      "sd_gen": 70.76149574644347
+    },
+    "sav_depositamt_bsl": {
+      "mean_real": 0.5563886056739218,
+      "mean_gen": 0.09497541427187373,
+      "sd_real": 7.517569676329402,
+      "sd_gen": 1.3618678624737925
+    },
+    "iagri_month_bsl": {
+      "mean_real": 0.11829357243533437,
+      "mean_gen": 2.2881221422882742e-05,
+      "sd_real": 35.87262218568521,
+      "sd_gen": 0.00028179388260097957
+    },
+    "ranimals_month_bsl": {
+      "mean_real": 19.855151873692627,
+      "mean_gen": 0.6384282063359523,
+      "sd_real": 174.1838527617404,
+      "sd_gen": 8.076321099875502
+    },
+    "percep_econ_bsl": {
+      "mean_real": 3.0679156908665104,
+      "mean_gen": 3.033061075886708,
+      "sd_real": 1.8842565079467628,
+      "sd_gen": 1.8492594049427094
+    },
+    "S": {
+      "mean_real": 93.60563433582107,
+      "mean_gen": 84.03996769636298,
+      "sd_real": 55.46181991962058,
+      "sd_gen": 37.817182761738174
+    },
+    "Y": {
+      "mean_real": 87.41722797454102,
+      "mean_gen": 80.98330436601498,
+      "sd_real": 53.124018025523135,
+      "sd_gen": 31.465776229018466
+    }
+  },
+  "corr_match_mean_abs": 0.046209660102925654,
+  "train_hist": {
+    "X": {
+      "critic_loss": [],
+      "w_est": [
+        0.00933343917131424,
+        1.7691466808319092,
+        1.7871880531311035,
+        1.7548195123672485,
+        1.6215628385543823,
+        1.5088446140289307
+      ],
+      "numpy_torch_max_err": 1.1379639301978273e-06
+    },
+    "S": {
+      "critic_loss": [],
+      "w_est": [
+        0.006646350026130676,
+        2.3924410343170166,
+        1.7675588130950928,
+        1.8430767059326172,
+        1.4925060272216797,
+        1.5944080352783203
+      ],
+      "numpy_torch_max_err": 3.478352553543118e-05
+    },
+    "Y": {
+      "critic_loss": [],
+      "w_est": [
+        0.0017432570457458496,
+        0.37963131070137024,
+        0.08873796463012695,
+        0.27546262741088867,
+        0.22197484970092773,
+        0.2950432300567627
+      ],
+      "numpy_torch_max_err": 1.1685603226396779e-05
+    }
+  }
+}

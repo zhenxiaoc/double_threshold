@@ -1,0 +1,208 @@
+<!doctype html><html><head><meta charset='utf-8'><title>V_11* Empirical Report</title><style>body{font-family:-apple-system,Segoe UI,Roboto,sans-serif;max-width:900px;margin:2rem auto;padding:0 1rem;line-height:1.5;color:#222}
+table{border-collapse:collapse;margin:1rem 0}th,td{border:1px solid #ccc;padding:4px 8px;font-size:14px}
+th{background:#f0f0f4}code{background:#f4f4f4;padding:1px 4px}pre{background:#f7f7f7;padding:10px;overflow-x:auto}
+blockquote{border-left:4px solid #c44;background:#fff4f4;padding:8px 12px;margin:1rem 0}h1,h2{border-bottom:1px solid #eee;padding-bottom:4px}</style></head><body><h1 id="empirical-report-path-specific-welfare-component-v_11">Empirical Report — Path-Specific Welfare Component <code>V_11^*</code></h1>
+<p><strong>Project:</strong> plug-in estimation and irregular inference for the (1,1) treatment-path
+welfare component of an estimated optimal two-stage dynamic treatment regime.
+<strong>Theory:</strong> <code>may_2026.tex</code> (Zhenxiao Chen). <strong>Date:</strong> 2026-07-13.</p>
+<blockquote>
+<p><strong>Headline honesty statement.</strong> No dataset that is downloadable without a data-use
+agreement passes the hard gates. The software, boundary diagnostics, sieve-Riesz +
+bootstrap inference, and the Monte Carlo study are complete and run on <strong>calibrated
+simulated data with known truth</strong>. <strong>This project does not claim a completed valid main
+empirical application.</strong> The main empirical data requirement is <strong>unresolved</strong> (see
+<code>docs/data_access_blockers.md</code>).</p>
+</blockquote>
+<p>Language key: <strong>design</strong> (from randomization) · <strong>protocol</strong> (trial document) ·
+<strong>diagnostic</strong> (data-supported) · <strong>maintained</strong> (modelling restriction, not verified) ·
+<strong>unresolved</strong>.</p>
+<hr />
+<h2 id="answers-to-the-29-required-questions-task-21">Answers to the 29 required questions (task §21)</h2>
+<ol>
+<li><strong>Which dataset was selected, and why?</strong> For the <em>runnable</em> pipeline, a <strong>calibrated
+   simulation</strong> (DGP 1, a regular double-boundary scalar-state design), because no
+   accessible real dataset passes the hard gates. The strongest <em>real</em> candidate is the
+   Ida et al. energy-rebate 2×2 experiment (n=2,400), selected on the scorecard for design
+   and continuity but scoring 0 on access (GATED microdata) — so it cannot be run here.</li>
+<li><strong>Was individual-level sequential treatment assignment actually available?</strong> <strong>No</strong> for
+   every gate-passing real candidate. For the simulation, unit-level <code>(S,T1,X,T2,Y)</code> is
+   available by construction.</li>
+<li><strong>Are both treatment stages randomized?</strong> In the simulation, <strong>yes, by design</strong>. In the
+   energy-rebate design, yes (fully-crossed 2×2); in SMARTs, generally <strong>no</strong> (only
+   non-responders are re-randomized).</li>
+<li><strong>What do <code>T1=1</code>, <code>T2=1</code> mean?</strong> In the simulation, the active first-/second-stage
+   treatments. For a real run they mean <em>randomized assignment</em> to the active arm (for IHS,
+   <code>T=1</code> is assignment to <em>any</em> notification — a randomized mixture).</li>
+<li><strong>What are <code>S, X, Y</code>?</strong> <code>S</code> baseline state (pre-<code>T1</code>), <code>X</code> intermediate state (post-<code>T1</code>,
+   pre-<code>T2</code>), <code>Y</code> final outcome (post-<code>T2</code>). Simulation units are continuous by
+   construction; the energy mapping is log pre/period-1 peak kWh and period-2 kWh.</li>
+<li><strong>Genuinely continuous or finely supported?</strong> In the simulation, <strong>genuinely
+   continuous</strong> (≥ 100 unique values, max point mass ≤ 0.05 — Table 4). Project STAR scores
+   would be <em>finely-supported, not genuinely continuous</em> (and STAR is not a 2×2).</li>
+<li><strong>How many independent units remain?</strong> Simulation: <strong>2,000</strong> (one unit per row; folds
+   keep units intact). Energy-rebate would be 2,400.</li>
+<li><strong>Four path counts?</strong> Simulation (n=2,000): <strong>00=503, 01=516, 10=527, 11=454</strong> (Table 5)
+   — all ≥ 150.</li>
+<li><strong>Are randomization probabilities known?</strong> <strong>Yes</strong> — <code>e1=e2=0.5</code> by design;
+   empirical <code>P(T1=1)=0.49</code>, <code>P(T2=1)=0.485</code>. Not ML-estimated.</li>
+<li><strong>Does sequential ignorability follow from the design?</strong> <strong>Yes (design)</strong> under
+    two-stage randomization; balance AUCs (<code>AUC(T1|S)</code>, <code>AUC(T2|S,T1,X)</code>) are reported as
+    diagnostics, near 0.5.</li>
+<li><strong>Global or availability-relative positivity?</strong> <strong>Global</strong> for the fully-crossed 2×2
+    simulation; <strong>availability-relative</strong> would be required for a SMART.</li>
+<li><strong>How much attrition?</strong> Simulation: <strong>0%</strong> missing <code>Y</code> (Table 7). A real run reports
+    missingness by path, state quantile, time, and site, with IPW-of-observation and
+    delta-adjustment sensitivity.</li>
+<li><strong>Is the scalar Markov restriction credible?</strong> It is a <strong>maintained</strong> restriction. The
+    diagnostic (Table 8) shows the rich model <code>Y~f(S,T1,X,T2)</code> gives <strong>no</strong> held-out MSE
+    improvement over <code>Y~f(X,T2)</code> in DGP 1 (incremental reduction −4%, i.e. none) →
+    <em>not flagged</em>; in the Markov-failure DGP 7 the diagnostic correctly flags it. Never
+    asserted "satisfied."</li>
+<li><strong>Do <code>δ</code> and <code>κ</code> cross zero?</strong> <strong>Yes</strong> — one interior root each (Table 9): <code>δ</code> root
+    ≈ −0.07 (true 0), <code>κ</code> root ≈ +0.08 (true 0).</li>
+<li><strong>Interior and regular roots?</strong> <strong>Yes</strong> — both roots are interior (within the central
+    95% of support), have derivatives bounded away from zero, and are classified <em>regular</em>
+    with no weak-margin flags.</li>
+<li><strong>Observations supporting each boundary?</strong> Boundary-band counts <code>N(h)</code> reported
+    (Table 9 / Fig 12); each active boundary has ≥ <code>max(50, 0.05n)</code> observations within the
+    primary band.</li>
+<li><strong>Estimate of <code>V_11^*</code>?</strong> <strong>0.886</strong> in outcome units, <strong>0.765</strong> in outcome-SD units
+    (cross-fitted direct plug-in; sieve-Riesz 0.897); truth 0.889 (Table 10). The four
+    components are 00=0.040, 01=0.087, 10=0.013, 11=0.886.</li>
+<li><strong>Other three path contributions?</strong> <code>V_00=0.040, V_01=0.087, V_10=0.013</code> (Table 10).</li>
+<li><strong>Do they sum to total optimal welfare?</strong> <strong>Yes</strong> — sum = 1.02623 = direct total,
+    <strong>component-sum residual = 0.0</strong> (Table 11); true total 1.031.</li>
+<li><strong>Plug-in vs IPW vs AIPW?</strong> Plug-in(direct) <strong>0.886</strong>, sieve-Riesz <strong>0.897</strong>, AIPW
+    (fixed learned policy) <strong>0.885</strong>, IPW <strong>0.737</strong> (Table 12). AIPW ≈ plug-in ≈ truth; IPW
+    is the high-variance benchmark and is farther off.</li>
+<li><strong>Which variance contributions are included?</strong> The sieve-Riesz SE includes the <code>μ</code>-score
+    (interior + moving-boundary) contribution <strong>conditional on the estimated densities
+    <code>m, p_a</code></strong>. The participant bootstrap includes <strong>all</strong> contributions (m, p_a, boundary).</li>
+<li><strong>Which are omitted / conditional?</strong> The sieve-Riesz SE <strong>omits</strong> <code>m</code> and (dominant)
+    <code>p_a</code> uncertainty — it is explicitly labelled <em>conditional on densities</em>. Monte Carlo
+    shows it under-covers (<code>se_ratio ≈ 0.3–0.6</code>, coverage 0.27–0.83; Table 16).</li>
+<li><strong>Did the proposed interval attain acceptable simulated coverage?</strong> The <strong>conditional
+    sieve interval did NOT</strong> (0.27–0.83 &lt; 0.90; 0.50 at DGP1 n=1500). The <strong>participant
+    bootstrap did</strong> on the regular design (DGP1 coverage 0.98 at both n=1500 and n=1000;
+    60 datasets × 99 bootstrap) — it is the recommended interval (Table 17).</li>
+<li><strong>Is the empirical interval substantively informative?</strong> For the bootstrap interval,
+    <strong>yes</strong> on the regular design (median length 0.32–0.40 outcome SD &lt; 0.50 →
+    <em>informative</em>). It is usable but <em>not</em> informative on the weak-first-stage design DGP3
+    (coverage 0.90, length 0.74 SD). The conditional sieve interval is not usable at all.</li>
+<li><strong>Is the sample large enough for the intended inference?</strong> For the regular design,
+    n ≈ 1000–1500 supports a usable/informative bootstrap interval; the weak-boundary and
+    multiple-root designs (DGP 3, 6) are materially harder and coverage degrades — consistent
+    with the irregular (<code>n^{-s/(2s+1)}</code>) rate.</li>
+<li><strong>Which conclusions are design-based?</strong> Sequential ignorability, positivity, known
+    propensities, path counts.</li>
+<li><strong>Which rely on the Markov model?</strong> Identification of <code>μ_a(x)=E[Y|X,T2=a]</code> as the stage-two
+    payoff, and hence the whole scalar estimator; flagged model-dependent when the diagnostic fails.</li>
+<li><strong>Which rely on spline/smoothness?</strong> The nuisance fits, the analytic decision-margin
+    derivatives, the regular-margin conditions, and the sieve-Riesz variance.</li>
+<li><strong>Which are only exploratory?</strong> All numbers here are <strong>simulation-based</strong> and thus a
+    methods demonstration, not empirical findings about any real population. The energy /
+    IHS / SMART configs are templates awaiting data access.</li>
+</ol>
+<hr />
+<h2 id="summary-of-estimates-simulation-dgp-1-n2000">Summary of estimates (simulation, DGP 1, n=2,000)</h2>
+<table>
+<thead>
+<tr>
+<th>quantity</th>
+<th>value (orig)</th>
+<th>value (SD)</th>
+<th>truth</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>V_11^*</code> (direct plug-in)</td>
+<td>0.886</td>
+<td>0.765</td>
+<td>0.889</td>
+</tr>
+<tr>
+<td><code>V_11^*</code> (sieve-Riesz)</td>
+<td>0.897</td>
+<td>0.774</td>
+<td>0.889</td>
+</tr>
+<tr>
+<td><code>V_00, V_01, V_10</code></td>
+<td>0.040, 0.087, 0.013</td>
+<td>—</td>
+<td>0.060, 0.062, 0.020</td>
+</tr>
+<tr>
+<td>total <code>V^*</code></td>
+<td>1.026</td>
+<td>—</td>
+<td>1.031</td>
+</tr>
+<tr>
+<td>component-sum residual</td>
+<td>0.000</td>
+<td>—</td>
+<td>0</td>
+</tr>
+</tbody>
+</table>
+<p>Roots: <code>δ</code> ≈ −0.07, <code>κ</code> ≈ +0.08 (both interior, regular). Analytic moving-boundary
+gradient vs finite differences: max relative error <strong>&lt; 1e-4</strong> (validated).</p>
+<h2 id="inference-summary-and-gono-go">Inference summary and go/no-go</h2>
+<table>
+<thead>
+<tr>
+<th>interval</th>
+<th>includes</th>
+<th>95% coverage (MC)</th>
+<th>median length</th>
+<th>verdict</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>sieve-Riesz (conditional on <code>m,p_a</code>)</td>
+<td>μ-score only</td>
+<td><strong>0.27–0.83</strong> (0.50 at DGP1 n=1500)</td>
+<td>0.10–0.28 SD</td>
+<td><strong>NOT usable</strong> — SE omits transition-law uncertainty (<code>se_ratio</code> 0.3–0.6)</td>
+</tr>
+<tr>
+<td><strong>participant bootstrap (full-refit)</strong></td>
+<td>everything (m, p_a, boundary)</td>
+<td>DGP1 <strong>0.98</strong> (n=1500) / <strong>0.98</strong> (n=1000); DGP3 0.90; DGP6 0.97</td>
+<td>DGP1 <strong>0.32–0.40 SD</strong>; DGP3 0.74; DGP6 0.57</td>
+<td><strong>usable &amp; informative</strong> on the regular design (recommended)</td>
+</tr>
+<tr>
+<td>AIPW (fixed learned policy)</td>
+<td>orthogonal score</td>
+<td>≈ 0.92–0.95</td>
+<td>≈ 0.35 SD</td>
+<td>benchmark for a <em>different, regular</em> object</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Go/No-Go (task §14).</strong> On the <strong>regular</strong> design (DGP1), the <strong>participant bootstrap
+passes both the usable (coverage ≥ 0.90, length ≤ 1 SD) and informative (length ≤ 0.5 SD)
+thresholds</strong> → verdict <strong>informative</strong> (coverage <strong>0.98</strong>, median length <strong>0.32 SD</strong>;
+<code>results/tables/table17_go_no_go.csv</code>, 60 datasets × 99 bootstrap, CV-selected K). The
+<strong>conditional sieve interval fails</strong> (coverage 0.50 ≪ 0.90). On the harder designs the
+bootstrap degrades honestly but stays usable: DGP3 (weak first-stage margin) coverage 0.90
+with length 0.74 SD (usable, <em>not</em> informative), DGP6 (multiple roots) coverage 0.97 with
+length 0.57 SD — the wider intervals reflect the slower irregular rate <code>n^{-s/(2s+1)}</code>.</p>
+<h2 id="caveats-and-unresolved-items">Caveats and unresolved items</h2>
+<ul>
+<li><strong>Main empirical data: unresolved.</strong> All numbers are simulation-based.</li>
+<li>The conditional sieve variance is <strong>incomplete</strong> (conditional on densities); the honest
+  interval is the bootstrap. A fully analytic complete-variance (hybrid) expansion is
+  described in <code>docs/inference_derivation.md</code> §4 but not implemented — the bootstrap stands
+  in for it.</li>
+<li>Weak-boundary / multiple-root regimes (DGP 3, 6) are materially harder; report those
+  coverages honestly rather than the best-case regular design.</li>
+<li>The scalar Markov restriction is <strong>maintained</strong>, not verified; a richer-history
+  robustness spec is the appropriate check on real data.</li>
+</ul>
+<p><em>See <code>docs/</code> for the full theory, estimand, identification, inference, and AIPW
+derivations; <code>results/tables</code> and <code>results/figures</code> for all 17 tables and 19 figures.</em></p></body></html>

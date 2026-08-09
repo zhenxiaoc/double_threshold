@@ -1,0 +1,21 @@
+# TEMPLATE for the Intern Health Study 2018 micro-randomized trial.
+# GATED: intervention-assignment + wearable micro-data require a University of Michigan DUA
+# (openICPSR 129225 survey portion may be public; SensorKit/Fitbit streams are not).
+# One adjacent-week triplet PER PARTICIPANT is used, so the independent unit is the participant.
+name: intern_health
+dataset: intern_health          # expects data/raw/intern_health.csv (never committed)
+outcome_units: "mean nightly sleep hours (week w+1)"
+seed: 20260713
+variables:
+  S: sleep_w_minus_1            # mean sleep, week w-1
+  T1: notify_w                  # 1 = any notification assigned in week w (mixture of categories)
+  X: sleep_w                    # mean sleep, week w (post T1, pre T2)
+  T2: notify_w_plus_1           # 1 = any notification assigned in week w+1
+  Y: sleep_w_plus_1             # mean sleep, week w+1
+  group: participant_id
+  site: institution
+treatment_probs:
+  e1: null                      # reconstruct from the trial's known weekly randomization prob
+  e2: null
+# NOTE: T=1 is a randomized mixture of notification categories; run category-specific
+# sensitivity analyses (sleep/activity/mood vs none) by filtering other categories.

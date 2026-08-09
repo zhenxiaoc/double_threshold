@@ -1,0 +1,28 @@
+{
+  "note": "SOFTWARE VALIDATION ONLY - public HeartSteps V1 MRT, activity-suggestion randomization, N=37, NOT for inference",
+  "treatment": "T=send.active (1=activity suggestion vs 0=none), randomized among available decisions",
+  "n_units": 37,
+  "path_counts": {
+    "00": 8,
+    "01": 6,
+    "10": 8,
+    "11": 15
+  },
+  "P_T1": 0.6216216216216216,
+  "P_T2": 0.5675675675675675,
+  "gates_passed": false,
+  "n_failures": 9,
+  "failures": [
+    "independent units n=37 < 1000",
+    "path 00 count 8 < hard minimum 75",
+    "path 01 count 6 < hard minimum 75",
+    "path 10 count 8 < hard minimum 75",
+    "path 11 count 15 < hard minimum 75",
+    "S distinct values 21 < 100",
+    "S max point mass 0.351 > 0.05",
+    "X distinct values 21 < 100",
+    "X max point mass 0.405 > 0.05"
+  ],
+  "S_unique": 21,
+  "X_unique": 21
+}

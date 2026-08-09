@@ -1,0 +1,9 @@
+### table03_variable_defs
+
+| symbol   | definition                           | timing   | type       |
+|:---------|:-------------------------------------|:---------|:-----------|
+| S        | baseline state (pre-T1)              | t0       | continuous |
+| T1       | first-stage randomized treatment     | t1       | binary     |
+| X        | intermediate state (post-T1, pre-T2) | t2       | continuous |
+| T2       | second-stage randomized treatment    | t3       | binary     |
+| Y        | final outcome (post-T2)              | t4       | continuous |

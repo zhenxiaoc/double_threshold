@@ -1,0 +1,21 @@
+# TEMPLATE for a SMART with history-dependent second-stage availability (e.g. BestFIT, ADAPT-2).
+# In these designs only NON-RESPONDERS are re-randomized, so global positivity FAILS.  Use the
+# availability set A2(H2), availability-relative positivity, and a BRANCH-SPECIFIC path parameter.
+# Requires >=500 independently randomized units in the relevant second-stage branch for a main
+# analysis.  GATED behind NDA/NIDA/registration DUAs -- data never committed.
+name: smart_branch
+dataset: smart                  # expects data/raw/smart.csv (never committed)
+outcome_units: "clinical outcome"
+seed: 20260713
+availability_col: stage2_available   # 1 if the unit entered the second randomization
+variables:
+  S: baseline_bmi
+  T1: stage1_arm                # binary first-stage assignment
+  X: pct_change                 # continuous intermediate response
+  T2: stage2_arm                # binary second-stage assignment (only where available)
+  Y: outcome
+  group: patient_id
+  site: site_id
+treatment_probs:
+  e1: 0.5
+  e2: 0.5                       # availability-relative: P(T2=1 | available, history)
