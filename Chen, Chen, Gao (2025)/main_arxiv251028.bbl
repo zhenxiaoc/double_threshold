@@ -1,0 +1,107 @@
+\begin{thebibliography}{19}
+\providecommand{\natexlab}[1]{#1}
+
+\bibitem[{Bhattacharya and Dupas(2012)}]{bhattacharya2012inferring}
+\textsc{Bhattacharya, D.} and \textsc{Dupas, P.} (2012). Inferring welfare
+  maximizing treatment assignment under budget constraints. \textit{Journal of
+  Econometrics}, \textbf{167}~(1), 168--196.
+
+\bibitem[{Bloom \textit{et~al.}(1997)Bloom, Orr, Bell, Cave, Doolittle, Lin and
+  Bos}]{BloomEtAl1997}
+\textsc{Bloom, H.~S.}, \textsc{Orr, L.~L.}, \textsc{Bell, S.~H.}, \textsc{Cave,
+  G.}, \textsc{Doolittle, F.}, \textsc{Lin, W.} and \textsc{Bos, J.~M.} (1997).
+  The benefits and costs of jtpa title ii-a programs: Key findings from the
+  national job training partnership act study. \textit{Journal of Human
+  Resources}, \textbf{32}~(3), 549--576.
+
+\bibitem[{Cattaneo \textit{et~al.}(2025{\natexlab{a}})Cattaneo, Titiunik and
+  Yu}]{cattaneo2025dist}
+\textsc{Cattaneo, M.~D.}, \textsc{Titiunik, R.} and \textsc{Yu, R.~R.}
+  (2025{\natexlab{a}}). Estimation and inference in boundary discontinuity
+  designs: Distance-based methods. \textit{arXiv preprint arXiv:2505.05670}.
+
+\bibitem[{Cattaneo \textit{et~al.}(2025{\natexlab{b}})Cattaneo, Titiunik and
+  Yu}]{cattaneo2025loc}
+\textsc{---}, \textsc{---} and \textsc{---} (2025{\natexlab{b}}). Estimation
+  and inference in boundary discontinuity designs: Location-based methods.
+  \textit{arXiv preprint arXiv:2505.05670}.
+
+\bibitem[{Chen \textit{et~al.}(2025)Chen, Christensen and
+  Kankanala}]{chen2025adaptive}
+\textsc{Chen, X.}, \textsc{Christensen, T.} and \textsc{Kankanala, S.} (2025).
+  Adaptive estimation and uniform confidence bands for nonparametric structural
+  functions and elasticities. \textit{The Review of Economic Studies},
+  \textbf{92}~(1), 162--196.
+
+\bibitem[{Chen and Christensen(2018)}]{chen2018optimal}
+\textsc{---} and \textsc{Christensen, T.~M.} (2018). Optimal sup-norm rates and
+  uniform inference on nonlinear functionals of nonparametric iv regression.
+  \textit{Quantitative Economics}, \textbf{9}~(1), 39--84.
+
+\bibitem[{Chen and Gao(2025)}]{chen2025semiparametric}
+\textsc{---} and \textsc{Gao, W.~Y.} (2025). Semiparametric learning of
+  integral functionals on submanifolds. \textit{arXiv preprint
+  arXiv:2507.12673}.
+
+\bibitem[{Chen and Liao(2014)}]{chen2014sieveIrregular}
+\textsc{---} and \textsc{Liao, Z.} (2014). Sieve m inference on irregular
+  parameters. \textit{Journal of Econometrics}, \textbf{182}~(1), 70--86.
+
+\bibitem[{Chen and Liao(2015)}]{chen2015sieve}
+\textsc{---} and \textsc{---} (2015). Sieve semiparametric two-step gmm under
+  weak dependence. \textit{Journal of Econometrics}, \textbf{189}~(1),
+  163--186.
+
+\bibitem[{Chen \textit{et~al.}(2014)Chen, Liao and Sun}]{chen2014sieve}
+\textsc{---}, \textsc{---} and \textsc{Sun, Y.} (2014). Sieve inference on
+  possibly misspecified semi-nonparametric time series models. \textit{Journal
+  of Econometrics}, \textbf{178}, 639--658.
+
+\bibitem[{Chen and Pouzo(2015)}]{chenpouzo2015sieve}
+\textsc{---} and \textsc{Pouzo, D.} (2015). Sieve wald and qlr inferences on
+  semi/nonparametric conditional moment models. \textit{Econometrica},
+  \textbf{83}~(3), 1013--1079.
+
+\bibitem[{Delfour and Zol{\'e}sio(2001)}]{delfour2001shapes}
+\textsc{Delfour, M.~C.} and \textsc{Zol{\'e}sio, J.-P.} (2001). \textit{Shapes
+  and geometries: metrics, analysis, differential calculus, and optimization}.
+  SIAM.
+
+\bibitem[{Evans and Gariepy(2015)}]{evans2015measure}
+\textsc{Evans, L.~C.} and \textsc{Gariepy, R.~F.} (2015). \textit{Measure
+  Theory and Fine Properties of Functions}. CRC Press.
+
+\bibitem[{Feng \textit{et~al.}(2025)Feng, Hong and
+  Nekipelov}]{feng2024statistical}
+\textsc{Feng, K.}, \textsc{Hong, H.} and \textsc{Nekipelov, D.} (2025).
+  Statistical inference of optimal allocations i: Regularities and their
+  implications. \textit{arXiv preprint arXiv:2403.18248}.
+
+\bibitem[{Kitagawa and Tetenov(2018)}]{kitagawa2018should}
+\textsc{Kitagawa, T.} and \textsc{Tetenov, A.} (2018). Who should be treated?
+  empirical welfare maximization methods for treatment choice.
+  \textit{Econometrica}, \textbf{86}~(2), 591--616.
+
+\bibitem[{Park(2025)}]{park2024debiased}
+\textsc{Park, G.} (2025). Debiased machine learning when nuisance parameters
+  appear in indicator functions. \textit{arXiv preprint arXiv:2403.15934}.
+
+\bibitem[{Schellhase and Kauermann(2012)}]{SchellhaseKauermann2012}
+\textsc{Schellhase, C.} and \textsc{Kauermann, G.} (2012). Density estimation
+  and comparison with a penalized mixture approach. \textit{Computational
+  Statistics}, \textbf{27}, 757--777.
+
+\bibitem[{Stone \textit{et~al.}(1997)Stone, Hansen, Kooperberg and
+  Truong}]{StoneEtAl1997}
+\textsc{Stone, C.~J.}, \textsc{Hansen, M.~H.}, \textsc{Kooperberg, C.} and
+  \textsc{Truong, Y.~K.} (1997). Polynomial splines and their tensor products
+  in extended linear modeling. \textit{The Annals of Statistics},
+  \textbf{25}~(4), 1371--1425.
+
+\bibitem[{Whitehouse \textit{et~al.}(2025)Whitehouse, Austern and
+  Syrgkanis}]{whitehouse2025inference}
+\textsc{Whitehouse, J.}, \textsc{Austern, M.} and \textsc{Syrgkanis, V.}
+  (2025). Inference on optimal policy values and other irregular functionals
+  via smoothing. \textit{arXiv preprint arXiv:2507.11780}.
+
+\end{thebibliography}

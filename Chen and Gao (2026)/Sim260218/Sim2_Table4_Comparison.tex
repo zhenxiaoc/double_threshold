@@ -1,0 +1,36 @@
+\begin{table}[!h]
+\centering
+\small
+\caption{Integral over estimated upper contour set: RMSE and CI coverage comparison.}
+\label{tab:Sim2_Disk_Comp}
+\vspace{0.3em}
+\textbf{Panel A: Plug-In}
+\begin{tabular}{lcccccc}
+\hline\hline
+ & \multicolumn{2}{c}{RMSE} & \multicolumn{4}{c}{CI Coverage (\%)} \\
+\cmidrule(lr){2-3} \cmidrule(lr){4-7}
+$n$ & Fixed & Adapt & Fix+N & Adp+N & Fix+B & Adp+B \\
+\hline
+500 & 0.0671 & 0.0694 & 93.3 & 94.1 & 93.2 & 93.4\\
+1000 & 0.0444 & 0.0470 & 96.3 & 95.2 & 96.1 & 94.8\\
+2000 & 0.0316 & 0.0335 & 94.3 & 95.0 & 94.5 & 94.7\\
+4000 & 0.0222 & 0.0237 & 96.1 & 95.4 & 95.6 & 95.0\\
+8000 & 0.0165 & 0.0180 & 95.2 & 95.5 & 94.4 & 95.2\\
+\hline\hline
+\end{tabular}
+\vspace{0.3em}
+\textbf{Panel B: LOO Debiased}
+\begin{tabular}{lcccccc}
+\hline\hline
+ & \multicolumn{2}{c}{RMSE} & \multicolumn{4}{c}{CI Coverage (\%)} \\
+\cmidrule(lr){2-3} \cmidrule(lr){4-7}
+$n$ & Fixed & Adapt & Fix+N & Adp+N & Fix+B & Adp+B \\
+\hline
+500 & 0.0743 & 1.0379 & 95.7 & 94.8 & 95.4 & 94.4\\
+1000 & 0.0445 & 0.0471 & 97.0 & 96.2 & 96.5 & 95.4\\
+2000 & 0.0316 & 0.0335 & 94.8 & 95.3 & 94.6 & 94.9\\
+4000 & 0.0223 & 0.0238 & 96.1 & 95.4 & 95.8 & 95.1\\
+8000 & 0.0165 & 0.0181 & 95.3 & 95.6 & 95.4 & 95.7\\
+\hline\hline
+\end{tabular}
+\end{table}
